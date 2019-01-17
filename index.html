@@ -420,7 +420,7 @@
                 
               
 
-              <time title="Post created: 2019-01-17 17:31:41 / Updated at: 17:36:18" itemprop="dateCreated datePublished" datetime="2019-01-17T17:31:41+08:00">2019-01-17</time>
+              <time title="Post created: 2019-01-17 18:43:00 / Updated at: 19:12:20" itemprop="dateCreated datePublished" datetime="2019-01-17T18:43:00+08:00">2019-01-17</time>
             
 
             
@@ -494,7 +494,7 @@
 <p>网址</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.raspberrypi.org/downloads/</span><br></pre></td></tr></table></figure>
 <p>选择需要的系统即可。这里我们选择树莓派官方的系统，自带的预装了桌面和一部分的软件的系统，如下图箭头所指。如果有一定的开源系统使用经验，可以选择最为轻量的裸机。</p>
-<p><img src="assets/1547626647217.png" alt="1547626647217"><strong>2、将SD卡格式化 </strong></p>
+<p><img src="/2019/01/17/树莓派入门/1547626647217.png" alt="1547626647217"><strong>2、将SD卡格式化 </strong></p>
 <p>​     直接在文件资源管理器中将SD卡格式化即可</p>
 <p><strong>3、下载将系统导入内存卡的工具etcher</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:/etcher.io/</span><br></pre></td></tr></table></figure>
@@ -505,9 +505,9 @@
 <p>在命令行输入：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br></pre></td></tr></table></figure>
 <p>得到如下的设置</p>
-<p><img src="assets/1547627677450.png" alt="1547627677450"></p>
+<p><img src="/2019/01/17/树莓派入门/1547627677450.png" alt="1547627677450"></p>
 <p>进入P2 SSH</p>
-<p><img src="assets/1547627761105.png" alt="1547627761105"></p>
+<p><img src="/2019/01/17/树莓派入门/1547627761105.png" alt="1547627761105"></p>
 <p>使能SSH即可</p>
 <p>电脑和树莓派连接同一个路由器，在浏览器访问路由器的IP（192.168.1.1），用户名admin 密码admin，得到树莓派的IP地址为192.168.1.101。</p>
 <p>在客户端输入</p>
@@ -517,13 +517,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install xrdp</span><br></pre></td></tr></table></figure>
 <p>等待安装完成。</p>
 <p>打开电脑的远程桌面</p>
-<p><img src="assets/1547628303536.png" alt="1547628303536"></p>
+<p><img src="/2019/01/17/树莓派入门/1547628303536.png" alt="1547628303536"></p>
 <p>输入树莓派的IP地址 </p>
 <p>远程桌面操作 用户名 pi  密码 123456</p>
-<p><img src="assets/1547628392756.png" alt="1547628392756"></p>
+<p><img src="/2019/01/17/树莓派入门/1547628392756.png" alt="1547628392756"></p>
 <h3 id="六、点亮LED"><a href="#六、点亮LED" class="headerlink" title="六、点亮LED"></a>六、点亮LED</h3><p>树莓派提供了一组通用IO口，称为GPIO。40个引脚的定义如下</p>
-<p><img src="assets/1547629540606.png" alt="1547629540606"></p>
-<p><img src="assets/1547644021189.png" alt="1547644021189"></p>
+<p><img src="/2019/01/17/树莓派入门/1547629540606.png" alt="1547629540606"></p>
+<p><img src="/2019/01/17/树莓派入门/1547644021189.png" alt="1547644021189"></p>
 <p>下面将树莓派和电子元器件连起来。</p>
 <p>注意二级管的正负极。正极接3.3V，负极通过电阻接地，可以看到二极管亮了。下面使用Node脚本控制LED。</p>
 <p>首先，将接地的导线从GND针脚拔出，接到GPIO0.0即11号引脚。</p>
@@ -999,7 +999,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
