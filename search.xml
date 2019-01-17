@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[树莓派入门学习控制LE灯]]></title>
+    <url>%2F2019%2F01%2F17%2F%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%2F</url>
+    <content type="text"><![CDATA[树莓派入门（控制LED灯）author： 刘真真 一、板载资源+配件树莓派是迷你主机，集成在一块电路板上。其型号为RAspberry Pi 三代 B型。 电源 ：Micro USB 接口的手机充电器，输出5V2A Micro SD卡 ：充当硬盘功能，大小最好在8G以上。 显示器：HDMI接口的显示器，需要屏幕则接 键盘：树莓派内置蓝牙，USB或蓝牙的无线键盘都可以用。需要时则配。 二、电子元件1、面包板 2、一段公头一端母头的杜邦线 3、LED二极管 4、1K的电阻 三、安装系统1、下载树莓派系统 网址 1https://www.raspberrypi.org/downloads/ 选择需要的系统即可。这里我们选择树莓派官方的系统，自带的预装了桌面和一部分的软件的系统，如下图箭头所指。如果有一定的开源系统使用经验，可以选择最为轻量的裸机。 2、将SD卡格式化 ​ 直接在文件资源管理器中将SD卡格式化即可 3、下载将系统导入内存卡的工具etcher 1https:/etcher.io/ 安装成功后打开，首先选择下载好的系统镜像文件，然后选择树莓派内存卡，点击Flash。 注意：在此过程中如果提示不可识别文件系统或者要格式化，直接点X关闭即可。 flash完成后，将内存卡取下插入树莓派，开机机即可查看新系统！ 四、SSH登录安装系统之后，树莓派就可以上网了，这里我们用WIFI上网。树莓派系统默认关闭SSH,这里首先需要打开树莓派的SSH。 在命令行输入： 1sudo raspi-config 得到如下的设置 进入P2 SSH 使能SSH即可 电脑和树莓派连接同一个路由器，在浏览器访问路由器的IP（192.168.1.1），用户名admin 密码admin，得到树莓派的IP地址为192.168.1.101。 在客户端输入 1ssh pi@192.168.1.101 输入树莓派的用户名 pi 和密码 123456与树莓派建立连接。 五、远程桌面为了更加方便地操作树莓派，安装远程桌面。打开树莓派终端，输入 1sudo apt-get install xrdp 等待安装完成。 打开电脑的远程桌面 输入树莓派的IP地址 远程桌面操作 用户名 pi 密码 123456 六、点亮LED树莓派提供了一组通用IO口，称为GPIO。40个引脚的定义如下 下面将树莓派和电子元器件连起来。 注意二级管的正负极。正极接3.3V，负极通过电阻接地，可以看到二极管亮了。下面使用Node脚本控制LED。 首先，将接地的导线从GND针脚拔出，接到GPIO0.0即11号引脚。 注意，3.3V的针脚是是有标识的，其他针脚都是圆的。 代码如下： 1234567891011var rpio = require(&apos;rpio&apos;)rpio.open(11, rpio.OUTPUT)function blink()&#123; rpio.write(11, rpio.HIGH); setTimeout(function ledoff()&#123; rpio.write(11, rpio.LOW); &#125;,50);&#125;setInterval(blink, 100); 用node.js稍作尝试，接下来轮到主角python出场了，Linux系统中很多功能是通过python实现的，且内嵌了python，无需安装，与python的兼容性极好，所以尝试用Python使LED闪烁。 代码如下 1234567891011121314151617#!/usr/bin/python#author:lzzimport RPi.GPIO as GPIOimport timeGPIO.setwarnings(False)GPIO.setmode(GPIO.BOARD)#BCM和BOARD两种命名模式GPIO.setup(11, GPIO.OUT)while True: GPIO.output(11, GPIO.HIGH) time.sleep(0.05) GPIO.output(11, GPIO.LOW) time.sleep(0.05)GPIO.cleanup() 程序逻辑： 1、导入GPIO的包 2、导入与时间包 3、设置GPIO针的命名方式，可用的有GPIO.BCM和GPIO.BOARD，分别代表boardcom命名系统和树莓派板子上的命名系统。 4、将引脚11设置为输出 5、控制引脚11的电平高低变换 6、清除掉之前RPi.GPIO.setup()设置的状态。退出程序一定要调用，否则下次调用会出错。]]></content>
+      <categories>
+        <category>搭建博客的尝试</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+        <tag>树莓派</tag>
+        <tag>LED灯，尝试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F01%2F17%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>搭建博客的尝试</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>github</tag>
+        <tag>npm</tag>
+        <tag>基础</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Hello,Hexo!]]></title>
     <url>%2F2019%2F01%2F17%2FHello-Hexo%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[使用hexo，是一件非常简单的事情。测试文本。]]></content>
   </entry>
 </search>
