@@ -3,12 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: Studying
-description: This is a try.
+title: 冰棍工作室
+#Popsicle Studio
+subtitle: 51 | STM32 | 树莓派 | python
+description: 身体和灵魂总有一个在路上
 keywords: Learn
 author: zhen
-language: zh-Hans
+language: zh-CN
 timezone:
 
 # URL
@@ -35,7 +36,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -88,7 +89,7 @@ search:
   field: post
   format: html
   limit: 10000
-  
+
 Plugins:
   - hexo-generator-cname
 
@@ -98,3 +99,10 @@ deploy:
   type: git
   repository: git@github.com:zhengirl/zhengirl.github.io.git
   branch: master
+
+# --------------------------------------------------------------
+# background settings
+# --------------------------------------------------------------
+# add canvas-nest effect
+# see detail from https://github.com/hustcc/canvas-nest.js
+canvas_nest: true
