@@ -15,20 +15,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F01%2F17%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
-      <categories>
-        <category>搭建博客的尝试</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>github</tag>
-        <tag>npm</tag>
-        <tag>基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Hello,Hexo!]]></title>
     <url>%2F2019%2F01%2F17%2FHello-Hexo%2F</url>
     <content type="text"><![CDATA[使用hexo，是一件非常简单的事情。测试文本。]]></content>
