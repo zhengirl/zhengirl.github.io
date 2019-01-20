@@ -1,12 +1,17 @@
 // Custom styles.
-//文章阴影
+//文章阴影与圆角
 .post {
-   margin-top: 0px;
-   margin-bottom: 60px;
-   border-radius: 42px;
-   padding: 25px;
-   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
-   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-radius: 16px;
+    padding: 25px;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.70);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.70);
+}
+
+//文章与文章之间的间隔大小
+.posts-expand .post {
+    margin-top: 64px;
 }
 
 //文章之间的分割线
@@ -14,7 +19,28 @@
     margin: 40px auto 40px;
     background: white;
 }
+// 文章中图片圆角
+.posts-expand .post-body img { margin: 0 auto 25px;border-radius: 16px; }
 
-.site-meta {
-    padding: 32px 0;
+//代码圆角
+.highlight {
+    border-radius: 8px
+}
+//链接突出
+.post-body p a{
+    color: #0593d3;
+    border-bottom: none;
+    border-bottom: 1px solid #0593d3;
+    &:hover {
+      color: #fc6423;
+      border-bottom: none;
+      border-bottom: 1px solid #fc6423;
+    }
+ }
+
+
+.site-overview {
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

@@ -12,7 +12,7 @@ author: zhen
 language: zh-CN
 timezone:
 
-# URL
+# UR
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://izhen.tech
 root: /
@@ -42,7 +42,8 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
+  #代码自动高亮
+  auto_detect: true
   tab_replace:
   
 # Home page setting
@@ -99,10 +100,9 @@ deploy:
   type: git
   repository: git@github.com:zhengirl/zhengirl.github.io.git
   branch: master
-
-# --------------------------------------------------------------
-# background settings
-# --------------------------------------------------------------
-# add canvas-nest effect
-# see detail from https://github.com/hustcc/canvas-nest.js
-canvas_nest: true
+# reading time
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
