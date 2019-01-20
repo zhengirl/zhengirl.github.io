@@ -96,13 +96,13 @@
 
 
 
-  <meta name="description" content="树莓派入门（控制LED灯）author： 刘真真 一、板载资源+配件树莓派是迷你主机，集成在一块电路板上。其型号为Rsspberry Pi 三代B型。 电源 ：Micro USB 接口的手机充电器，输出5V2A Micro SD卡 ：充当硬盘功能，大小最好在8G以上。 显示器：HDMI接口的显示器，需要屏幕则接 键盘：树莓派内置蓝牙，USB或蓝牙的无线键盘都可以用。需要时则配。 二、电子元件1、面">
+  <meta name="description" content="树莓派入门（控制LED灯）author： 刘真真  写在前面：树莓派是基于Linux的迷你主机，但功能完善，且预留了很多IO口给开发者扩展，比单片机的功能强大不少，可以将Python程序移植到树莓派上。本文简单介绍了新手如何使用树莓派和利用树莓派点亮一个LED灯。">
 <meta name="keywords" content="树莓派,入门,LED">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树莓派入门">
 <meta property="og:url" content="http://izhen.tech/2019/01/18/树莓派入门/index.html">
 <meta property="og:site_name" content="冰棍工作室">
-<meta property="og:description" content="树莓派入门（控制LED灯）author： 刘真真 一、板载资源+配件树莓派是迷你主机，集成在一块电路板上。其型号为Rsspberry Pi 三代B型。 电源 ：Micro USB 接口的手机充电器，输出5V2A Micro SD卡 ：充当硬盘功能，大小最好在8G以上。 显示器：HDMI接口的显示器，需要屏幕则接 键盘：树莓派内置蓝牙，USB或蓝牙的无线键盘都可以用。需要时则配。 二、电子元件1、面">
+<meta property="og:description" content="树莓派入门（控制LED灯）author： 刘真真  写在前面：树莓派是基于Linux的迷你主机，但功能完善，且预留了很多IO口给开发者扩展，比单片机的功能强大不少，可以将Python程序移植到树莓派上。本文简单介绍了新手如何使用树莓派和利用树莓派点亮一个LED灯。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://izhen.tech/2019/01/18/树莓派入门/1547626647217.png">
 <meta property="og:image" content="http://izhen.tech/2019/01/18/树莓派入门/1547627677450.png">
@@ -111,10 +111,10 @@
 <meta property="og:image" content="http://izhen.tech/2019/01/18/树莓派入门/1547628392756.png">
 <meta property="og:image" content="http://izhen.tech/2019/01/18/树莓派入门/1547629540606.png">
 <meta property="og:image" content="http://izhen.tech/2019/01/18/树莓派入门/1547644021189.png">
-<meta property="og:updated_time" content="2019-01-20T05:31:28.000Z">
+<meta property="og:updated_time" content="2019-01-20T06:56:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树莓派入门">
-<meta name="twitter:description" content="树莓派入门（控制LED灯）author： 刘真真 一、板载资源+配件树莓派是迷你主机，集成在一块电路板上。其型号为Rsspberry Pi 三代B型。 电源 ：Micro USB 接口的手机充电器，输出5V2A Micro SD卡 ：充当硬盘功能，大小最好在8G以上。 显示器：HDMI接口的显示器，需要屏幕则接 键盘：树莓派内置蓝牙，USB或蓝牙的无线键盘都可以用。需要时则配。 二、电子元件1、面">
+<meta name="twitter:description" content="树莓派入门（控制LED灯）author： 刘真真  写在前面：树莓派是基于Linux的迷你主机，但功能完善，且预留了很多IO口给开发者扩展，比单片机的功能强大不少，可以将Python程序移植到树莓派上。本文简单介绍了新手如何使用树莓派和利用树莓派点亮一个LED灯。">
 <meta name="twitter:image" content="http://izhen.tech/2019/01/18/树莓派入门/1547626647217.png">
 
 
@@ -445,7 +445,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-20 13:31:28" itemprop="dateModified" datetime="2019-01-20T13:31:28+08:00">2019-01-20</time>
+                <time title="修改时间：2019-01-20 14:56:38" itemprop="dateModified" datetime="2019-01-20T14:56:38+08:00">2019-01-20</time>
               
             
           </span>
@@ -493,7 +493,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2k</span>
+                <span title="本文字数">2.1k</span>
               
 
               
@@ -528,6 +528,9 @@
 
       
         <h2 id="树莓派入门（控制LED灯）"><a href="#树莓派入门（控制LED灯）" class="headerlink" title="树莓派入门（控制LED灯）"></a>树莓派入门（控制LED灯）</h2><p>author： 刘真真</p>
+<blockquote>
+<p><strong>写在前面：</strong>树莓派是基于Linux的迷你主机，但功能完善，且预留了很多IO口给开发者扩展，比单片机的功能强大不少，可以将Python程序移植到树莓派上。本文简单介绍了新手如何使用树莓派和利用树莓派点亮一个LED灯。<br><a id="more"></a></p>
+</blockquote>
 <h3 id="一、板载资源-配件"><a href="#一、板载资源-配件" class="headerlink" title="一、板载资源+配件"></a>一、板载资源+配件</h3><p>树莓派是迷你主机，集成在一块电路板上。其型号为<code>Rsspberry Pi 三代B型</code>。</p>
 <p><strong>电源 ：</strong>Micro USB 接口的手机充电器，输出5V2A</p>
 <p><strong>Micro SD卡 </strong>：充当硬盘功能，大小最好在8G以上。</p>
@@ -536,7 +539,7 @@
 <h3 id="二、电子元件"><a href="#二、电子元件" class="headerlink" title="二、电子元件"></a>二、电子元件</h3><p>1、面包板</p>
 <p>2、一段公头一端母头的杜邦线</p>
 <p>3、LED二极管</p>
-<p>4、1K的电阻<br><a id="more"></a></p>
+<p>4、1K的电阻</p>
 <h3 id="三、安装系统"><a href="#三、安装系统" class="headerlink" title="三、安装系统"></a>三、安装系统</h3><p><strong>1、下载树莓派系统</strong></p>
 <p>网址: <a href="https://www.raspberrypi.org/downloads/" target="_blank" rel="noopener">https://www.raspberrypi.org/downloads/</a></p>
 <p>选择需要的系统即可。这里我们选择树莓派官方的系统，预装了桌面和部分软件，如下图箭头所指。如果有一定的开源系统使用经验，可以选择最为轻量的只有操作系统的裸机。</p>
@@ -848,7 +851,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">10k</span>
+    <span title="站点总字数">16k</span>
   
 
   
@@ -857,7 +860,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">9 分钟</span>
+    <span title="站点阅读时长">15 分钟</span>
   
 </div>
 
