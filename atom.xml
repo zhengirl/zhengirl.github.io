@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://izhen.tech/"/>
-  <updated>2019-02-18T04:02:40.000Z</updated>
+  <updated>2019-02-18T06:52:22.000Z</updated>
   <id>http://izhen.tech/</id>
   
   <author>
@@ -15,6 +15,71 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>19题删除链表的指定节点</title>
+    <link href="http://izhen.tech/2019/02/18/19%E9%A2%98%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0N%E7%9A%84%E8%8A%82%E7%82%B9/"/>
+    <id>http://izhen.tech/2019/02/18/19题删除链表倒数N的节点/</id>
+    <published>2019-02-18T06:45:30.000Z</published>
+    <updated>2019-02-18T06:52:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="删除链表的指定节点"><a href="#删除链表的指定节点" class="headerlink" title="删除链表的指定节点"></a>删除链表的指定节点</h2><blockquote><p>难度：中等         思路：窗口法</p></blockquote><h3 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h3><p>给定一个链表，删除链表的倒数第<code>n</code>个节点，并且返回链表的头结点。</p><p>示例：</p><blockquote><p>给定一个链表：1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</p><p>当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</p></blockquote><p><strong>说明</strong>：给定的n保证是有效的。</p><a id="more"></a><p><strong>进阶：</strong>你能尝试一趟扫描实现吗？</p><h3 id="二、问题分析"><a href="#二、问题分析" class="headerlink" title="二、问题分析"></a>二、问题分析</h3><h4 id="2-1-逻辑梳理"><a href="#2-1-逻辑梳理" class="headerlink" title="2.1 逻辑梳理"></a>2.1 逻辑梳理</h4><p>本题和链表有关，链表是最基本的数据结构，链表中的元素可存储在内存的任何地方，链表的每个元素都存储了下一个元素的地址，从而使一系列随机的内存地址串在一起。链表的优势在于插入和删除元素，可以快速完成而不需要移动其他元素。链表由一个个节点组成，节点有两部分，节点的值和下一个节点的地址，尾节点的下一个节点的地址为空。在Python中即<code>None</code>，想要通过一趟扫描删除倒数第n个节点，最有效的方法就是窗口法，指针<code>p，q</code>之间间隔n个节点，然后指针<code>p、q</code>同步往尾部移动，当<code>q</code>到达尾节点时，<code>p</code>后的节点即我们需要删除的目标节点。将p内节点的地址指向下下个节点，删除目标节点，任务完成。</p><h4 id="2-2-难点分析"><a href="#2-2-难点分析" class="headerlink" title="2.2 难点分析"></a>2.2 难点分析</h4><p>函数传进来的参数和传出去的值都是头结点，在删除节点时，有一个问题需要考虑，怎么保证下下个节点是存在的，如果恰好要删除的就是头节点，是否在程序中考虑到了？其实我刚开始也没考虑，就把示例传进去有正确结果返回高兴的屁颠屁颠以为自己做完了，但上传上去之后被特殊情况搞得晕头转向，仔细分析了很长时间才把<code>head、p、q</code>之间的关系理清楚。</p><h3 id="三、代码分析"><a href="#三、代码分析" class="headerlink" title="三、代码分析"></a>三、代码分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeNthFromEnd</span><span class="params">(self, head, n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> head:</span><br><span class="line">        p=head</span><br><span class="line">        q=head</span><br><span class="line">        <span class="comment"># 构建窗口，保证p、q指针之间间隔n个节点</span></span><br><span class="line">        <span class="keyword">while</span> n&gt;<span class="number">0</span> <span class="keyword">and</span> q != <span class="keyword">None</span>:</span><br><span class="line">            <span class="comment">#当循环结束，如果q=None，则说明需要删除的是头结点。</span></span><br><span class="line">            q = q.next</span><br><span class="line">            n -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> q != <span class="keyword">None</span>:<span class="comment">#需要删除的节点不是头结点，p、q正常往链表尾部滑动</span></span><br><span class="line">            <span class="keyword">while</span> q.next != <span class="keyword">None</span> : </span><br><span class="line">                p = p.next</span><br><span class="line">                q = q.next</span><br><span class="line">        <span class="keyword">if</span> q == <span class="keyword">None</span> : <span class="comment">#要删除头节点</span></span><br><span class="line">           head = p.next</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p.next = p.next.next <span class="comment">#正常情况 删除p后面的节点</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure><p>复杂度分析：</p><p>O(N)                              <em>N为链表的节点个数</em></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;删除链表的指定节点&quot;&gt;&lt;a href=&quot;#删除链表的指定节点&quot; class=&quot;headerlink&quot; title=&quot;删除链表的指定节点&quot;&gt;&lt;/a&gt;删除链表的指定节点&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;难度：中等         思路：窗口法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;一、问题描述&quot;&gt;&lt;a href=&quot;#一、问题描述&quot; class=&quot;headerlink&quot; title=&quot;一、问题描述&quot;&gt;&lt;/a&gt;一、问题描述&lt;/h3&gt;&lt;p&gt;给定一个链表，删除链表的倒数第&lt;code&gt;n&lt;/code&gt;个节点，并且返回链表的头结点。&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;给定一个链表：1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5, 和 n = 2.&lt;/p&gt;
+&lt;p&gt;当删除了倒数第二个节点后，链表变为 1-&amp;gt;2-&amp;gt;3-&amp;gt;5.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：给定的n保证是有效的。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://izhen.tech/categories/LeetCode/"/>
+    
+    
+      <category term="leetcode" scheme="http://izhen.tech/tags/leetcode/"/>
+    
+      <category term="链表" scheme="http://izhen.tech/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+      <category term="窗口法" scheme="http://izhen.tech/tags/%E7%AA%97%E5%8F%A3%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>18题四个数的求和</title>
+    <link href="http://izhen.tech/2019/02/18/18%E9%A2%98%E5%9B%9B%E4%B8%AA%E6%95%B0%E7%9A%84%E5%92%8C/"/>
+    <id>http://izhen.tech/2019/02/18/18题四个数的和/</id>
+    <published>2019-02-18T06:41:43.000Z</published>
+    <updated>2019-02-18T06:52:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="四个数的和"><a href="#四个数的和" class="headerlink" title="四个数的和"></a>四个数的和</h2><blockquote><p>难度：中等         思路：头尾逼近法</p></blockquote><h3 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h3><p>给定一个包含<code>n</code>个整数的数组<code>nums</code>和一个目标值<code>target</code>，判断nums中是否存在四个元素a，b，c，和d，使得<code>a+b+c+d</code>的值与target相等？找出所有满足条件且不重复的四元组。</p><p>注意：答案中不可以包含重复的四元组。</p><a id="more"></a><p>示例：</p><blockquote><p>给定数组nums=[1, 0, -1, 0, -2, 2], 和target=0。</p><p>满足要求的四元组集合为：</p><p>[[-1 ,0, 0, 1],</p><p>[-2, -1, 1, 2],</p><p>[-2 ,0, 0, 2]]</p></blockquote><h3 id="二、问题分析"><a href="#二、问题分析" class="headerlink" title="二、问题分析"></a>二、问题分析</h3><p>在LeetCode的题目顺序有一个由浅入深的过渡，这题的解决方法完全可以参照三个数的求和问题。让我们来回顾一个三个数的求和问题，三个数的求和与四个数的求和表面上是一模一样的，无非是把三个数替换为四个数，所以在解决方式上内核机制也是相同的。</p><h4 id="2-1-排序"><a href="#2-1-排序" class="headerlink" title="2.1 排序"></a>2.1 排序</h4><p>数的求和问题，最简单粗暴的方法就是把给定的数组for循环遍历几次，找到所有符合要求的数，但是因为时间开销过大，提交的时候不被通过，所以只能找其他的渠道。第一步，将所给的数按照从小到大排序，Python有内置的排序函数，这里就直接调用了。</p><h4 id="2-2-开始遍历"><a href="#2-2-开始遍历" class="headerlink" title="2.2 开始遍历"></a>2.2 开始遍历</h4><p>在多个数求和问题中，使用的方法为两头法，具体实现方法如下。首先固定第一个数，从数组的头部开始，求出目标数target与第一个数的差值diff；然后固定第二个数，求出之前的差值diff与当前数的差值作为新目标goal；然后使用头尾法，如果头尾的和小于goal，则头往后移，如果头尾的和大于goal，则尾往前移（经过排序后，尾部的数大头部的数小），如果头尾的和正好等于goal，那么我们找到了目标数，把四个数存到结果中，同时往中间移动头尾的坐标，头尾位置下标相等时此次遍历结束；然后依次移动前两个固定的数。</p><h4 id="2-3-难点分析"><a href="#2-3-难点分析" class="headerlink" title="2.3 难点分析"></a>2.3 难点分析</h4><p>这题确定了算法，还是有很多细节需要推敲，而这些细节有些时候比算法本身更花时间。在题目描述中，它特地提出让我们注意解决重复元素的问题，解决重复问题有两个思路：一是处理返回的数组，将其中重复的元素去掉；二是从源头上解决问题，在生成结果数组时，一旦发现重复就不再添加入返回数组。这题真正的难点就在这里了，怎么样才能最有效的去除重复元素呢？这里只提供一个巧妙的思路，重复的元素从何而来，归根结底是因为数组中本身就有重复的元素，在求和的时候，当我们移动到下一个元素的时候，检测当前元素与上一个元素是否相等，这里为什么是与前一个元素作比较而不是与后一个元素作比较，这是有原因的，如果与后一个元素作比较的话，那么就会漏掉一种情况，这两个数相等但是他们的和就是我们想找的，如果与后一个元素作比较的话这个数还没有参与计算就会被跳过。结果会错误。（注意，当我们访问一个元素的时候要确保这个元素存在否则就会报错），如果相等就跳过此次循环。（<strong>需要确保每个不重复元素都被访问到</strong>）</p><h4 id="2-4-细节"><a href="#2-4-细节" class="headerlink" title="2.4 细节"></a>2.4 细节</h4><p>首先要对输入的数组进行长度判断，避免输入空数组时后续进行不存在位置的的访问导致程序崩溃；其次是重复元素的问题，在元素移动过程中，为了不产生重复的四个数组合，固定的第一个数往后移动时，需要考虑当前数与上一个数是否相等，如果相等，则使用<code>continue</code>语句跳过此次循环。固定的第一个数也存在一模一样的问题。其次是首尾移动时，当检测到首尾之和相等时，头部和尾部的位置都往中间移，这时头尾分别与后一个数作比较，如果相等的话，头尾坐标继续往中间靠。（这里检测到头尾之和与目标相等时，不存在一个数还没用到就被丢弃，所以可以与后一个数作比较）</p><h3 id="三、代码分析"><a href="#三、代码分析" class="headerlink" title="三、代码分析"></a>三、代码分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fourSum</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">    res=[]</span><br><span class="line">    nums=sorted(nums) <span class="comment">#排序</span></span><br><span class="line">    length=len(nums)</span><br><span class="line">    <span class="keyword">if</span> length &lt; <span class="number">4</span>:</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, length<span class="number">-3</span>):</span><br><span class="line">        diff=target-nums[i]</span><br><span class="line">        <span class="keyword">if</span> i &gt;<span class="number">0</span> <span class="keyword">and</span> nums[i<span class="number">-1</span>] == nums[i]: <span class="comment">#防止重复</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>, length<span class="number">-2</span>):</span><br><span class="line">            goal=diff-nums[j]</span><br><span class="line">            front=j+<span class="number">1</span></span><br><span class="line">            back=length<span class="number">-1</span></span><br><span class="line">            <span class="keyword">if</span> j &gt;i+<span class="number">1</span> <span class="keyword">and</span> nums[j<span class="number">-1</span>] == nums[j]:<span class="comment">#防止重复</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">while</span> front&lt;back:</span><br><span class="line">                the_sum=nums[front]+nums[back]</span><br><span class="line">                <span class="keyword">if</span> the_sum &lt; goal:</span><br><span class="line">                    front += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> the_sum &gt; goal:</span><br><span class="line">                    back -= <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> the_sum == goal:                        </span><br><span class="line">                    res.append([nums[i], nums[j], nums[front],nums[back]])</span><br><span class="line">                    <span class="keyword">while</span> front &lt;back <span class="keyword">and</span> nums[front] == nums[front+<span class="number">1</span>]:<span class="comment">#防止重复</span></span><br><span class="line">                        front+=<span class="number">1</span></span><br><span class="line">                    <span class="keyword">while</span> front &lt; back <span class="keyword">and</span> nums[back]==nums[back<span class="number">-1</span>]:<span class="comment">#防止重复</span></span><br><span class="line">                        back -=<span class="number">1</span></span><br><span class="line">                    front += <span class="number">1</span></span><br><span class="line">                    back -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure><p>复杂度分析：</p><p>耗时还是非常多的，排序+O(N^3^)。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;四个数的和&quot;&gt;&lt;a href=&quot;#四个数的和&quot; class=&quot;headerlink&quot; title=&quot;四个数的和&quot;&gt;&lt;/a&gt;四个数的和&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;难度：中等         思路：头尾逼近法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;一、问题描述&quot;&gt;&lt;a href=&quot;#一、问题描述&quot; class=&quot;headerlink&quot; title=&quot;一、问题描述&quot;&gt;&lt;/a&gt;一、问题描述&lt;/h3&gt;&lt;p&gt;给定一个包含&lt;code&gt;n&lt;/code&gt;个整数的数组&lt;code&gt;nums&lt;/code&gt;和一个目标值&lt;code&gt;target&lt;/code&gt;，判断nums中是否存在四个元素a，b，c，和d，使得&lt;code&gt;a+b+c+d&lt;/code&gt;的值与target相等？找出所有满足条件且不重复的四元组。&lt;/p&gt;
+&lt;p&gt;注意：答案中不可以包含重复的四元组。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://izhen.tech/categories/LeetCode/"/>
+    
+    
+      <category term="leetcode" scheme="http://izhen.tech/tags/leetcode/"/>
+    
+      <category term="求和" scheme="http://izhen.tech/tags/%E6%B1%82%E5%92%8C/"/>
+    
+      <category term="数组" scheme="http://izhen.tech/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>17题电话号码的字母组合</title>
