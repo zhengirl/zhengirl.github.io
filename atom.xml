@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://izhen.tech/"/>
-  <updated>2019-02-18T06:52:22.000Z</updated>
+  <updated>2019-02-22T11:04:42.000Z</updated>
   <id>http://izhen.tech/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>21题有序链表的合并</title>
+    <link href="http://izhen.tech/2019/02/22/21%E9%A2%98%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/"/>
+    <id>http://izhen.tech/2019/02/22/21题合并两个有序链表/</id>
+    <published>2019-02-22T09:37:03.000Z</published>
+    <updated>2019-02-22T11:04:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="LeetCode刷题之21题有序链表的合并"><a href="#LeetCode刷题之21题有序链表的合并" class="headerlink" title="LeetCode刷题之21题有序链表的合并"></a>LeetCode刷题之21题有序链表的合并</h2><blockquote><p>难度：easy                                  思路：硬算</p></blockquote><h3 id="一、题目描述"><a href="#一、题目描述" class="headerlink" title="一、题目描述"></a>一、题目描述</h3><p>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p><p><strong>示例：</strong></p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4</span><br><span class="line">输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</span><br></pre></td></tr></table></figure><a id="more"></a><h3 id="二、问题分析"><a href="#二、问题分析" class="headerlink" title="二、问题分析"></a>二、问题分析</h3><p>有序链表的合并是归并排序中的经典算法，这题采用常规思路即可解决问题，唯一要注意的点是当指针p、q中任一指针为空时后续应该如何操作。</p><h3 id="三、代码分析"><a href="#三、代码分析" class="headerlink" title="三、代码分析"></a>三、代码分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeTwoLists</span><span class="params">(self, l1, l2,)</span>:</span></span><br><span class="line">p = l1 </span><br><span class="line">    q = l2</span><br><span class="line">    head = <span class="keyword">None</span></span><br><span class="line">    <span class="comment"># p q均不为空</span></span><br><span class="line">    <span class="keyword">while</span> p != <span class="keyword">None</span> <span class="keyword">and</span> q != <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">if</span>  p.val &lt;= q.val :</span><br><span class="line">            <span class="keyword">if</span> head == <span class="keyword">None</span>:</span><br><span class="line">                head = p</span><br><span class="line">                n = p</span><br><span class="line">                p = p.next</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                n.next = p</span><br><span class="line">                n = n.next</span><br><span class="line">                p = p.next</span><br><span class="line">        <span class="keyword">else</span> :</span><br><span class="line">            <span class="keyword">if</span> head == <span class="keyword">None</span>:</span><br><span class="line">                head = q</span><br><span class="line">                n = q</span><br><span class="line">                q = q.next</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                n.next = q</span><br><span class="line">                n = n.next</span><br><span class="line">                q = q.next</span><br><span class="line">    <span class="comment"># p q中任一为空 将p指定为非空 直接将p后面的节点连在n的后面</span></span><br><span class="line">    <span class="keyword">if</span> p == <span class="keyword">None</span> <span class="keyword">and</span> q !=<span class="keyword">None</span>:</span><br><span class="line">        p = q</span><br><span class="line">        q = <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">if</span> head == <span class="keyword">None</span>:</span><br><span class="line">        head = p</span><br><span class="line">        n = p</span><br><span class="line">    <span class="keyword">else</span>:            </span><br><span class="line">        n.next = p</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure><p>时间复杂度分析：</p><p><strong>O(M+N)       M为l1链表的长度，N为l2链表的长度</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;LeetCode刷题之21题有序链表的合并&quot;&gt;&lt;a href=&quot;#LeetCode刷题之21题有序链表的合并&quot; class=&quot;headerlink&quot; title=&quot;LeetCode刷题之21题有序链表的合并&quot;&gt;&lt;/a&gt;LeetCode刷题之21题有序链表的合并&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;难度：easy                                  思路：硬算&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;一、题目描述&quot;&gt;&lt;a href=&quot;#一、题目描述&quot; class=&quot;headerlink&quot; title=&quot;一、题目描述&quot;&gt;&lt;/a&gt;一、题目描述&lt;/h3&gt;&lt;p&gt;将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：1-&amp;gt;2-&amp;gt;4, 1-&amp;gt;3-&amp;gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://izhen.tech/categories/LeetCode/"/>
+    
+    
+      <category term="链表" scheme="http://izhen.tech/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+      <category term="LeetCode" scheme="http://izhen.tech/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode刷题之20题有效的括号</title>
+    <link href="http://izhen.tech/2019/02/22/20%E9%A2%98%E6%8B%AC%E5%8F%B7%E7%9A%84%E9%85%8D%E5%AF%B9/"/>
+    <id>http://izhen.tech/2019/02/22/20题括号的配对/</id>
+    <published>2019-02-22T09:23:53.000Z</published>
+    <updated>2019-02-22T09:34:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="LeetCode刷题之20题有效的括号"><a href="#LeetCode刷题之20题有效的括号" class="headerlink" title="LeetCode刷题之20题有效的括号"></a>LeetCode刷题之20题有效的括号</h2><blockquote><p>难度：简单                                   思路：栈</p></blockquote><h3 id="一、题目描述"><a href="#一、题目描述" class="headerlink" title="一、题目描述"></a>一、题目描述</h3><p>给定一个只包括 <code>&#39;(&#39;</code>，<code>&#39;)&#39;</code>，<code>&#39;{&#39;</code>，<code>&#39;}&#39;</code>，<code>&#39;[&#39;</code>，<code>&#39;]&#39;</code> 的字符串，判断字符串是否有效。</p><p>有效字符串需满足：</p><ol><li>左括号必须用相同类型的右括号闭合。</li><li>左括号必须以正确的顺序闭合。</li></ol><p>注意空字符串可被认为是有效字符串。</p><a id="more"></a><p>示例：</p><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="string">"&#123;[]&#125;"</span></span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure><h3 id="二、问题分析"><a href="#二、问题分析" class="headerlink" title="二、问题分析"></a>二、问题分析</h3><p>这是一题难度为简单的题，但我仍旧很久没有思路，就是没有想到利用栈的特性，本题是一道经典的栈的特性的题目，想到栈，就成功了一大半。</p><h3 id="三、-代码分析"><a href="#三、-代码分析" class="headerlink" title="三、 代码分析"></a>三、 代码分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValid</span><span class="params">(self, s)</span>:</span></span><br><span class="line">    res = <span class="keyword">True</span></span><br><span class="line">    stack = []</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">for</span> element <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> stack: <span class="comment"># 栈为空</span></span><br><span class="line">            stack.append(element) </span><br><span class="line">            <span class="comment"># 利用栈的先进后出的特点，判断列表的尾部即栈的头部的元素情况</span></span><br><span class="line">        <span class="keyword">elif</span> stack[<span class="number">-1</span>] == <span class="string">'('</span> <span class="keyword">and</span> element == <span class="string">')'</span>:</span><br><span class="line">            stack.pop() <span class="comment"># 出栈在栈的头部</span></span><br><span class="line">        <span class="keyword">elif</span> stack[<span class="number">-1</span>] == <span class="string">'['</span> <span class="keyword">and</span> element == <span class="string">']'</span>:</span><br><span class="line">            stack.pop()</span><br><span class="line">        <span class="keyword">elif</span> stack[<span class="number">-1</span>] == <span class="string">'&#123;'</span> <span class="keyword">and</span> element == <span class="string">'&#125;'</span>:</span><br><span class="line">            stack.pop()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            stack.append(element) <span class="comment"># 进栈也在栈的头部</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 判断栈是否为空，为空则说明括号是对称有效</span></span><br><span class="line">        <span class="keyword">if</span> stack :</span><br><span class="line">            res = <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">else</span> :</span><br><span class="line">            res = <span class="keyword">True</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure><p>复杂度分析：</p><p><strong>O(N)           N为字符串的长度</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;LeetCode刷题之20题有效的括号&quot;&gt;&lt;a href=&quot;#LeetCode刷题之20题有效的括号&quot; class=&quot;headerlink&quot; title=&quot;LeetCode刷题之20题有效的括号&quot;&gt;&lt;/a&gt;LeetCode刷题之20题有效的括号&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;难度：简单                                   思路：栈&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;一、题目描述&quot;&gt;&lt;a href=&quot;#一、题目描述&quot; class=&quot;headerlink&quot; title=&quot;一、题目描述&quot;&gt;&lt;/a&gt;一、题目描述&lt;/h3&gt;&lt;p&gt;给定一个只包括 &lt;code&gt;&amp;#39;(&amp;#39;&lt;/code&gt;，&lt;code&gt;&amp;#39;)&amp;#39;&lt;/code&gt;，&lt;code&gt;&amp;#39;{&amp;#39;&lt;/code&gt;，&lt;code&gt;&amp;#39;}&amp;#39;&lt;/code&gt;，&lt;code&gt;&amp;#39;[&amp;#39;&lt;/code&gt;，&lt;code&gt;&amp;#39;]&amp;#39;&lt;/code&gt; 的字符串，判断字符串是否有效。&lt;/p&gt;
+&lt;p&gt;有效字符串需满足：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;左括号必须用相同类型的右括号闭合。&lt;/li&gt;
+&lt;li&gt;左括号必须以正确的顺序闭合。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;注意空字符串可被认为是有效字符串。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://izhen.tech/categories/LeetCode/"/>
+    
+    
+      <category term="LeetCode" scheme="http://izhen.tech/tags/LeetCode/"/>
+    
+      <category term="栈" scheme="http://izhen.tech/tags/%E6%A0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>19题删除链表的指定节点</title>

@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[21题有序链表的合并]]></title>
+    <url>%2F2019%2F02%2F22%2F21%E9%A2%98%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[LeetCode刷题之21题有序链表的合并 难度：easy 思路：硬算 一、题目描述将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 示例： 12输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4 二、问题分析有序链表的合并是归并排序中的经典算法，这题采用常规思路即可解决问题，唯一要注意的点是当指针p、q中任一指针为空时后续应该如何操作。 三、代码分析1234567891011121314151617181920212223242526272829303132333435def mergeTwoLists(self, l1, l2,): p = l1 q = l2 head = None # p q均不为空 while p != None and q != None: if p.val &lt;= q.val : if head == None: head = p n = p p = p.next else: n.next = p n = n.next p = p.next else : if head == None: head = q n = q q = q.next else: n.next = q n = n.next q = q.next # p q中任一为空 将p指定为非空 直接将p后面的节点连在n的后面 if p == None and q !=None: p = q q = None if head == None: head = p n = p else: n.next = p return head 时间复杂度分析： O(M+N) M为l1链表的长度，N为l2链表的长度]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LeetCode刷题之20题有效的括号]]></title>
+    <url>%2F2019%2F02%2F22%2F20%E9%A2%98%E6%8B%AC%E5%8F%B7%E7%9A%84%E9%85%8D%E5%AF%B9%2F</url>
+    <content type="text"><![CDATA[LeetCode刷题之20题有效的括号 难度：简单 思路：栈 一、题目描述给定一个只包括 &#39;(&#39;，&#39;)&#39;，&#39;{&#39;，&#39;}&#39;，&#39;[&#39;，&#39;]&#39; 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。 注意空字符串可被认为是有效字符串。 示例： 12输入: "&#123;[]&#125;"输出: true 二、问题分析这是一题难度为简单的题，但我仍旧很久没有思路，就是没有想到利用栈的特性，本题是一道经典的栈的特性的题目，想到栈，就成功了一大半。 三、 代码分析123456789101112131415161718192021222324def isValid(self, s): res = True stack = [] for element in s: if not stack: # 栈为空 stack.append(element) # 利用栈的先进后出的特点，判断列表的尾部即栈的头部的元素情况 elif stack[-1] == '(' and element == ')': stack.pop() # 出栈在栈的头部 elif stack[-1] == '[' and element == ']': stack.pop() elif stack[-1] == '&#123;' and element == '&#125;': stack.pop() else: stack.append(element) # 进栈也在栈的头部 # 判断栈是否为空，为空则说明括号是对称有效 if stack : res = False else : res = True return res 复杂度分析： O(N) N为字符串的长度]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[19题删除链表的指定节点]]></title>
     <url>%2F2019%2F02%2F18%2F19%E9%A2%98%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0N%E7%9A%84%E8%8A%82%E7%82%B9%2F</url>
     <content type="text"><![CDATA[删除链表的指定节点 难度：中等 思路：窗口法 一、问题描述给定一个链表，删除链表的倒数第n个节点，并且返回链表的头结点。 示例： 给定一个链表：1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2. 当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5. 说明：给定的n保证是有效的。 进阶：你能尝试一趟扫描实现吗？ 二、问题分析2.1 逻辑梳理本题和链表有关，链表是最基本的数据结构，链表中的元素可存储在内存的任何地方，链表的每个元素都存储了下一个元素的地址，从而使一系列随机的内存地址串在一起。链表的优势在于插入和删除元素，可以快速完成而不需要移动其他元素。链表由一个个节点组成，节点有两部分，节点的值和下一个节点的地址，尾节点的下一个节点的地址为空。在Python中即None，想要通过一趟扫描删除倒数第n个节点，最有效的方法就是窗口法，指针p，q之间间隔n个节点，然后指针p、q同步往尾部移动，当q到达尾节点时，p后的节点即我们需要删除的目标节点。将p内节点的地址指向下下个节点，删除目标节点，任务完成。 2.2 难点分析函数传进来的参数和传出去的值都是头结点，在删除节点时，有一个问题需要考虑，怎么保证下下个节点是存在的，如果恰好要删除的就是头节点，是否在程序中考虑到了？其实我刚开始也没考虑，就把示例传进去有正确结果返回高兴的屁颠屁颠以为自己做完了，但上传上去之后被特殊情况搞得晕头转向，仔细分析了很长时间才把head、p、q之间的关系理清楚。 三、代码分析12345678910111213141516171819def removeNthFromEnd(self, head, n): if head: p=head q=head # 构建窗口，保证p、q指针之间间隔n个节点 while n&gt;0 and q != None: #当循环结束，如果q=None，则说明需要删除的是头结点。 q = q.next n -= 1 if q != None:#需要删除的节点不是头结点，p、q正常往链表尾部滑动 while q.next != None : p = p.next q = q.next if q == None : #要删除头节点 head = p.next else: p.next = p.next.next #正常情况 删除p后面的节点 return head 复杂度分析： O(N) N为链表的节点个数]]></content>
