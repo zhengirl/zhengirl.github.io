@@ -97,7 +97,7 @@
 
 
   <meta name="description" content="索引及其背后的数据结构支持索引索引是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时。 数据库查询是数据库最主要的功能之一. 如果想要理解MySQL中索引是如何工作的，最简单的方法就是去看看一本书的“目录”部分：如果想在一本书中找到某个索引，一般会先看书的“目录”，找到对应的页码。">
-<meta name="keywords" content="索引，B+树">
+<meta name="keywords" content="索引,B+树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="索引及其背后的数据结构支持">
 <meta property="og:url" content="http://izhen.tech/2019/08/11/数据库索引及其算法/index.html">
@@ -111,7 +111,7 @@
 <meta property="og:image" content="https://img.moilk.top/img/zhen/2019-08-12-114032.png">
 <meta property="og:image" content="https://img.moilk.top/img/zhen/2019-08-12-115607.png">
 <meta property="og:image" content="https://img.moilk.top/img/zhen/2019-08-12-120152.png">
-<meta property="og:updated_time" content="2019-08-12T13:25:01.220Z">
+<meta property="og:updated_time" content="2019-08-12T13:40:17.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="索引及其背后的数据结构支持">
 <meta name="twitter:description" content="索引及其背后的数据结构支持索引索引是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时。 数据库查询是数据库最主要的功能之一. 如果想要理解MySQL中索引是如何工作的，最简单的方法就是去看看一本书的“目录”部分：如果想在一本书中找到某个索引，一般会先看书的“目录”，找到对应的页码。">
@@ -445,7 +445,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-12 21:25:01" itemprop="dateModified" datetime="2019-08-12T21:25:01+08:00">2019-08-12</time>
+                <time title="修改时间：2019-08-12 21:40:17" itemprop="dateModified" datetime="2019-08-12T21:40:17+08:00">2019-08-12</time>
               
             
           </span>
@@ -531,8 +531,7 @@
 <p>数据库查询是数据库最主要的功能之一.</p>
 <p>如果想要理解MySQL中索引是如何工作的，最简单的方法就是去看看一本书的“目录”部分：如果想在一本书中找到某个索引，一般会先看书的“目录”，找到对应的页码。</p>
 <a id="more"></a>
-<p>###B-Tree和B+Tree</p>
-<p>目前大部分数据库系统及文件系统都采用B-Tree或者B+Tree作为索引结构。这是有一定原因的。首先介绍其数据结构。</p>
+<h3 id="B-Tree和B-Tree"><a href="#B-Tree和B-Tree" class="headerlink" title="B-Tree和B+Tree"></a>B-Tree和B+Tree</h3><p>目前大部分数据库系统及文件系统都采用B-Tree或者B+Tree作为索引结构。这是有一定原因的。首先介绍其数据结构。</p>
 <h4 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h4><p>为了描述B-Tree，首先定义一条数据记录为一个二元组[key，data]，key为记录的键值，对应不同的数据记录，key是互不相同的。data为数据记录出key外的数据。那么B-Tree是满足下列条件的数据结构：</p>
 <ul>
 <li><p>d为大于1的一个正整数，称为B-Tree的度。</p>
@@ -583,8 +582,7 @@
 <p>除此之外，B+Tree更适合外存索引，原因和内节点出度d有关。由上面分析可以看到，d越大索引的性能越好，而出度的上限取决于节点内key和data的大小。</p>
 <p>由于B+Tree内节点去掉了data域，因此可以拥有更大的出度，拥有更好的性能。</p>
 <h3 id="MySQL索引实现"><a href="#MySQL索引实现" class="headerlink" title="MySQL索引实现"></a>MySQL索引实现</h3><p>不同存储引起对索引的实现方式是不同的，这里主要介绍MyISAM和InnoDB两个存储引擎的索引实现方式。</p>
-<p>####MyISAM索引实现</p>
-<p>MyISAM引擎使用B+Tree作为索引结构，叶节点的data域存放的是数据记录的地址。下图是MyISAM索引的原理图：</p>
+<h4 id="MyISAM索引实现"><a href="#MyISAM索引实现" class="headerlink" title="MyISAM索引实现"></a>MyISAM索引实现</h4><p>MyISAM引擎使用B+Tree作为索引结构，叶节点的data域存放的是数据记录的地址。下图是MyISAM索引的原理图：</p>
 <p><img src="https://img.moilk.top/img/zhen/2019-08-12-113652.png" alt="image-20190812193647976"></p>
 <p>这里假设表一共有三列，假设我们以col1为主键，则图8是一个MyISAM表的主索引示意。可以看出，MyISAM的索引文件仅仅保存数据记录的地址。在MyISAM中，主索引和辅助索引在结构上没有任何区别，只是主索引要求key是唯一的，而辅助索引的key可以重复。如果我们在col2上建立一个辅助索引，则此索引的结构如下图所示：</p>
 <p><img src="https://img.moilk.top/img/zhen/2019-08-12-114032.png" alt="image-20190812194027786"></p>
@@ -646,7 +644,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/索引，B-树/" rel="tag"><i class="fa fa-tag"></i> 索引，B+树</a>
+            <a href="/tags/索引/" rel="tag"><i class="fa fa-tag"></i> 索引</a>
+          
+            <a href="/tags/B-树/" rel="tag"><i class="fa fa-tag"></i> B+树</a>
           
         </div>
       
@@ -817,7 +817,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -875,7 +879,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引及其背后的数据结构支持"><span class="nav-text">索引及其背后的数据结构支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Tree"><span class="nav-text">B-Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Tree-1"><span class="nav-text">B+Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#带有顺序访问指针的B-Tree"><span class="nav-text">带有顺序访问指针的B+Tree</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用B-Tree"><span class="nav-text">为什么使用B+Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL索引实现"><span class="nav-text">MySQL索引实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB索引实现"><span class="nav-text">InnoDB索引实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引使用策略及优化"><span class="nav-text">索引使用策略及优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最长前缀原理与相关优化"><span class="nav-text">最长前缀原理与相关优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#情况一：全列匹配"><span class="nav-text">情况一：全列匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况二：最左前缀匹配"><span class="nav-text">情况二：最左前缀匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况三：查询条件用到了索引中列的精确匹配，但是中间某个条件未提供。"><span class="nav-text">情况三：查询条件用到了索引中列的精确匹配，但是中间某个条件未提供。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况四：查询条件没有指定索引第一列"><span class="nav-text">情况四：查询条件没有指定索引第一列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况五：匹配某列的前缀字符串"><span class="nav-text">情况五：匹配某列的前缀字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况六：范围查询"><span class="nav-text">情况六：范围查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况七：查询条件中含有函数或表达式"><span class="nav-text">情况七：查询条件中含有函数或表达式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引选择性与前缀索引"><span class="nav-text">索引选择性与前缀索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB的主键选择与插入优化"><span class="nav-text">InnoDB的主键选择与插入优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引及其背后的数据结构支持"><span class="nav-text">索引及其背后的数据结构支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-text">索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-Tree和B-Tree"><span class="nav-text">B-Tree和B+Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Tree"><span class="nav-text">B-Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Tree-1"><span class="nav-text">B+Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#带有顺序访问指针的B-Tree"><span class="nav-text">带有顺序访问指针的B+Tree</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用B-Tree"><span class="nav-text">为什么使用B+Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL索引实现"><span class="nav-text">MySQL索引实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MyISAM索引实现"><span class="nav-text">MyISAM索引实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB索引实现"><span class="nav-text">InnoDB索引实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引使用策略及优化"><span class="nav-text">索引使用策略及优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最长前缀原理与相关优化"><span class="nav-text">最长前缀原理与相关优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#情况一：全列匹配"><span class="nav-text">情况一：全列匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况二：最左前缀匹配"><span class="nav-text">情况二：最左前缀匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况三：查询条件用到了索引中列的精确匹配，但是中间某个条件未提供。"><span class="nav-text">情况三：查询条件用到了索引中列的精确匹配，但是中间某个条件未提供。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况四：查询条件没有指定索引第一列"><span class="nav-text">情况四：查询条件没有指定索引第一列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况五：匹配某列的前缀字符串"><span class="nav-text">情况五：匹配某列的前缀字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况六：范围查询"><span class="nav-text">情况六：范围查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情况七：查询条件中含有函数或表达式"><span class="nav-text">情况七：查询条件中含有函数或表达式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引选择性与前缀索引"><span class="nav-text">索引选择性与前缀索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB的主键选择与插入优化"><span class="nav-text">InnoDB的主键选择与插入优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
