@@ -38,6 +38,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[单例模式]]></title>
+    <url>%2F2019%2F07%2F24%2F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[单例Singleton确保一个类只有一个实例，并提供该实例的全局访问点。Singleton通常被用来代表那些本质上唯一的系统组件，比如窗口管理器或者文件系统。 使用一个私有构造函数，一个私有静态变量以及一个公有静态函数来实现。私有构造函数保证了不能通过构造函数来创建对象实例，只能通过公有静态函数返回唯一的私有静态变量。 最简单的单例实现：饿汉模式12345678910public class Singleton &#123; //类装载的时候已经初始化 private static final Singleton instance = new Singleton(); //构造器私有化 private Singleton()&#123; &#125; //提供公有的获取方法 public static Singleton getInstance()&#123; return instance; &#125;&#125; 这种实现方式虽然不是最好的实现方式，但是是最常用的单例的实现方式。因为类一开始即被装载，所以不用担心线程安全的问题。但是缺点就是如果不使用这个类，就会内存浪费的问题。 线程安全：双重检查模式加锁操作只需要对实例化部分的代码进行，只有当instance没有被实例化时，才需要进行加锁。 1234567891011121314151617public class Singleton &#123; //volatile的生命作用是内存变量共享，和禁止指令重排序 private static volatile Single instance; //构造器私有化 private Singleton()&#123;&#125; //提供公有的获取方法 public static Singleton getInstance()&#123; if(instance == null)&#123; synchronized (Singleton.class)&#123; if(instance == null)&#123; instance = new Singleton(); &#125; &#125; &#125; return instance; &#125;&#125; 为什么在锁的内部还有再加一层if判断呢，如果只有一个if语句，在instance==null的情况下，如果两个线程都进入了if语句块中，虽然在if语句块中有加锁操作，但两个线程都会执行实例化instance= new Singleton()这条语句，只是时间问题。那么就会进行两次实例化。破话了单例模式。因此需要两个if语句：第一个语句用来避免instance已经被实例化后的加锁操作，第二个if语句进行了加锁，只有一个线程进入，不会出现多次实例化的情况。 静态内部类实现当Singleton类被加载时，静态内部类SingletonHolder没有被下载进内存。只有当调用getInstance()方法时从而触发SingletonHolder.instance时SingletonHolder才会被加载。此时初始化INSTANCE视力，并且JVM确保INSTANCE只能被实例化一次。 这种方式不仅具有延迟初始化的好处，而且由JVM提供了对线程安全的支持。 1234567891011public class Singleton &#123; private Singleton()&#123;&#125; //静态内部类不会在一开始被装载，所以没有内存消耗的问题 //JVM在装载静态内部类是线程安全的，只有在使用内部类才会去装载，所以线程是安全的 private static class SingletonHolder &#123; private static final Singleton INSTNCE = new Singleton(); &#125; public static Singleton getInstance()&#123; return SingletonHolder.INSTANCE; &#125;&#125; JVM装载内部类并不是程序启动就装载，而且装载内部类是线程安全的。所以这个单例模式真正意义上实现了懒加载与线程安全且节省了内存。 枚举实现实现单例模式只需编写一个包含单个元素的枚举类型： 12345public enum Singleton &#123; INSTANCE; public void updateInstance()&#123; &#125;&#125; 简洁，且无偿地提供了序列化机制，绝对防止多次实例化，即使是在面对复杂的序列化或者反射攻击的时候。可以防止反射攻击，防止反序列化重新创建新的对象。 参考资料[1] Effective Java 中文版 [2] 技术面试必备基础知识 [3] CodeSheep单例模式]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>单例模式</tag>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[部署Java项目]]></title>
     <url>%2F2019%2F06%2F28%2FJava%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%2F</url>
     <content type="text"><![CDATA[如何部署自己的项目在服务器上 主要是点来点去的。 一、登录服务器点击IDEA菜单栏的tools-&gt;Deplment，输入服务器的账号和密码，测试一下，查看是否连接成功。这里连接道康服务器，之前已经输入过账号和密码，连接成功。 tools-&gt;start SSH session,终端进入道康服务器。 输入指令ps aux | grep visualcensus过滤查找之前运行的进程号。 杀死之前的那个进程kill 1215，1215为上面查找的进程id。 二、打包当然要配合数据库，但是因为男神操作太快，这里就没能记录下来。 右侧边状态栏，点击Maven，在Lifecycle中点击package，将整个项目打包。等待打包完成。 三、上传直接将打包好的额target包下面的.jar文件用鼠标拖到Remote Host中的visualcensus中，在命令行输入nohup java -jar visualcensusserver-0.0.1-SNAPSHOT.jar &gt; /dev/null 2&gt;&amp;1 &amp;y运行java工程。]]></content>
