@@ -94,6 +94,36 @@
   </entry>
   
   <entry>
+    <title>HTTPS的建立过程</title>
+    <link href="http://izhen.tech/2019/08/14/HTTPS/"/>
+    <id>http://izhen.tech/2019/08/14/HTTPS/</id>
+    <published>2019-08-14T14:09:41.000Z</published>
+    <updated>2019-09-02T06:45:49.890Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="HTTPS简介"><a href="#HTTPS简介" class="headerlink" title="HTTPS简介"></a>HTTPS简介</h2><p>HTTP有如下安全性问题：</p><ul><li>使用明文进行通信，内容可能会被窃听</li><li>不验证通信方的身份，通信方的身份有可能遭遇伪装</li><li>无法验证报文的完整性，报文有可能遭篡改。</li></ul><p>HTTPS不是新协议，而是让HTTP先和SSL（Secure Socket Layer）通信，再由SSL和TCP通信，也就是说HTTPS使用了隧道进行通信。</p><a id="more"></a><p>通过使用SSL，HTTPS具有了加密（防窃听）、认证（防伪装）和完整性保护（防篡改）</p><p>HTTPS采用混合的加密机制，使用非对称秘钥加密用于传输对称秘钥来保证传输过程的安全性，之后使用对称秘钥加密进行通信来保证通信过程的效率。</p><h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><p>除了加/解密之外，还可以用加密系统对报文进行签名，以说明是谁编写的报文，同时证明报文未被篡改过。这种技术称为数字签名。</p><p>使用数字签名有以下两个好处：</p><ul><li>签名可以证明是作者编写了这条报文。只有作者才会有最机密的私有秘钥。因此，只有作者才能计算出这些校验和。校验和就像来自作者的个人”签名“一样。</li><li>签名可以防止报文被篡改。如果有恶意攻击者在报文传输过程中对其进行了修改，校验和就不再匹配了。由于校验和只有作者保密的私有秘钥才能产生。所以攻击者无法为篡改了的报文伪造出正确的校验码。</li></ul><p>下面的例子说明了A是如何向节点B发送一条报文，并对其进行签名的。</p><ul><li>节点A将变长报文提取为定长的摘要</li><li>节点A对摘要应用了一个”签名“函数，这个函数会将用户的私有秘钥作为参数，因为只有用户才知道私有秘钥，所以正确的签名函数会说明签名者就是其所有者。</li><li>一旦计算出签名，节点A就将其附加在报文的末尾，并将报文和签名都发送给B。</li><li>在接收端，如果节点B需要确定报文确实是节点A发出的，而且没有被篡改过，节点B就可以对签名进行检查。节点B接收经私有秘钥扰码的签名，并应用了使用公开秘钥的反函数。如果拆包后的摘要与节点B自己的摘要版本不匹配，要么就是在报文传输过程中被篡改了，要么就是发送端没有节点A的私有秘钥。</li></ul><h3 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h3><p>通过使用证书来对通信方进行认证。</p><p>数字证书认证机构（CA）是客户端与服务器双方都可信赖的第三方机构。</p><p>服务器的运营人员向CA提出公开秘钥的申请，CA在判明申请者的身份之后,会对已申请的公开密钥做数字签名，然后分配这个已签名的公开秘钥，并将该公开秘钥放入公开秘钥证书后绑定在一起。进行HTTPS通信时，服务器会把证书发送给客户端，客户端取得其中的公开秘钥之后，先使用数字签名进行验证，如果验证通过了，就可以开始通信了。</p><h3 id="HTTPS的通信过程"><a href="#HTTPS的通信过程" class="headerlink" title="HTTPS的通信过程"></a>HTTPS的通信过程</h3><p><img src="https://img.moilk.top/img/zhen/2019-08-31-085823.png" alt="image-20190831165820155"></p><p>由上图可知，HTTPS的通信过程主要分为以下几个步骤：</p><ul><li>客户端向服务端发送请求</li><li>服务端返回数字证书</li><li>客户端用自己的CA（主流的CA机构证书一般都内置在各个主流浏览器中)公钥去解密证书，如果证书有问题会提示风险</li><li>如果证书没问题，客户端会生成一个对称加密的随机秘钥然后再和刚刚解密服务器端公钥对数据进行加密，然后发送给服务器</li><li>服务器收到以后用自己的私钥对客户端发来的对称秘钥进行解密</li><li>之后双方就拿着这个对称加密秘钥来进行正常的通信</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;HTTPS简介&quot;&gt;&lt;a href=&quot;#HTTPS简介&quot; class=&quot;headerlink&quot; title=&quot;HTTPS简介&quot;&gt;&lt;/a&gt;HTTPS简介&lt;/h2&gt;&lt;p&gt;HTTP有如下安全性问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用明文进行通信，内容可能会被窃听&lt;/li&gt;
+&lt;li&gt;不验证通信方的身份，通信方的身份有可能遭遇伪装&lt;/li&gt;
+&lt;li&gt;无法验证报文的完整性，报文有可能遭篡改。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;HTTPS不是新协议，而是让HTTP先和SSL（Secure Socket Layer）通信，再由SSL和TCP通信，也就是说HTTPS使用了隧道进行通信。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="HTTP" scheme="http://izhen.tech/categories/HTTP/"/>
+    
+    
+      <category term="HTTPS" scheme="http://izhen.tech/tags/HTTPS/"/>
+    
+      <category term="加密" scheme="http://izhen.tech/tags/%E5%8A%A0%E5%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HashMap和ConcurrentHashMap</title>
     <link href="http://izhen.tech/2019/08/13/HashMap%E5%92%8CConCurrentHashMap/"/>
     <id>http://izhen.tech/2019/08/13/HashMap和ConCurrentHashMap/</id>
@@ -539,28 +569,6 @@
       <category term="入门" scheme="http://izhen.tech/tags/%E5%85%A5%E9%97%A8/"/>
     
       <category term="LED" scheme="http://izhen.tech/tags/LED/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello,Hexo!</title>
-    <link href="http://izhen.tech/2019/01/17/Hello-Hexo/"/>
-    <id>http://izhen.tech/2019/01/17/Hello-Hexo/</id>
-    <published>2019-01-17T02:16:56.000Z</published>
-    <updated>2019-01-18T02:22:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用hexo，是一件非常简单的事情。测试文本。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;使用hexo，是一件非常简单的事情。测试文本。&lt;/p&gt;
-
-      
-    
-    </summary>
-    
     
   </entry>
   
