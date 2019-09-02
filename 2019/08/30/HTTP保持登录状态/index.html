@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="冰棍工作室">
 <meta property="og:description" content="HTTP保持登录状态1. 无状态的HTTP协议HTTP无状态是指：HTTP协议对事物处理是没有记忆能力的，也就是说服务器不知道客户端是什么状态。当我们向服务器发送请求后，服务器解析此请求，然后返回对应的响应，服务器负责完成整个过程。这个过程是独立的的，服务器不会记录前后状态的变化，也就是缺失状态记录。这就是说如果后续处理需要前面的信息，就必须重传，这导致需要额外传递一些前面的重复请求，才能获取后续">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-31T08:47:00.290Z">
+<meta property="og:updated_time" content="2019-08-31T08:49:33.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP保持登录状态的机制">
 <meta name="twitter:description" content="HTTP保持登录状态1. 无状态的HTTP协议HTTP无状态是指：HTTP协议对事物处理是没有记忆能力的，也就是说服务器不知道客户端是什么状态。当我们向服务器发送请求后，服务器解析此请求，然后返回对应的响应，服务器负责完成整个过程。这个过程是独立的的，服务器不会记录前后状态的变化，也就是缺失状态记录。这就是说如果后续处理需要前面的信息，就必须重传，这导致需要额外传递一些前面的重复请求，才能获取后续">
@@ -437,7 +437,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-31 16:47:00" itemprop="dateModified" datetime="2019-08-31T16:47:00+08:00">2019-08-31</time>
+                <time title="修改时间：2019-08-31 16:49:33" itemprop="dateModified" datetime="2019-08-31T16:49:33+08:00">2019-08-31</time>
               
             
           </span>
@@ -541,7 +541,7 @@
 <h4 id="Session误区"><a href="#Session误区" class="headerlink" title="Session误区"></a>Session误区</h4><p>对于Session来说，除非程序员通知服务器删除Session，否则服务器会一直保留。</p>
 <p>但是在我们关闭浏览器后，浏览器不会主动关闭之前通知服务器它将要关闭，所以服务器不会有机会知道浏览器已经关闭。</p>
 <p>大部分Session机制使用会话Cookis来保存SessionID信息，而关闭浏览器后，<strong>Cookies消失了，再次连接服务器时，就无法找到原来的Session了</strong>。如果服务器设置的Cookies被浏览器保存到硬盘上，或者用某种手段改写浏览器发出HTTP请求头把原来的Cookies发送给服务器，则当再次打开服务器是，仍然能够找到原来的SessionID，仍然可以保存登录状态。</p>
-<p>由于关闭浏览器不会使Session被删除，这就需要服务器为Session设置一个失效实际那，当距离客户端上一次使用Session的时间超过这个失效时间时，服务器就认为客户端停止了活动，会把Session删除以节省存储空间。</p>
+<p>由于关闭浏览器不会使Session被删除，这就需要服务器为Session设置一个失效时间，当距离客户端上一次使用Session的时间超过这个失效时间时，服务器就认为客户端停止了活动，会把Session删除以节省存储空间。</p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>[1] <a href="https://www.imooc.com/article/38017" target="_blank" rel="noopener">Session和Cookies的原理及代码实现</a></p>
 
       
@@ -590,6 +590,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/02/进程通信的方式和细节/" rel="prev" title="进程间通信的各种方式及比较">
+                进程间通信的各种方式及比较 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -663,7 +667,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -690,7 +694,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -769,7 +775,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -859,7 +867,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">59k</span>
+    <span title="站点总字数">60k</span>
   
 
   
@@ -868,7 +876,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">54 分钟</span>
+    <span title="站点阅读时长">55 分钟</span>
   
 </div>
 
