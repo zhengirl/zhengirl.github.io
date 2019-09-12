@@ -375,6 +375,251 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://izhen.tech/2019/09/12/DNS查询/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhen">
+      <meta itemprop="description" content="一个人只拥有此生此世是不够的，他还应该拥有诗意的世界。">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="冰棍工作室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/12/DNS查询/" class="post-title-link" itemprop="url">DNS解析</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-12 09:52:31 / 修改时间：21:52:36" itemprop="dateCreated datePublished" datetime="2019-09-12T09:52:31+08:00">2019-09-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="DNS概述"><a href="#DNS概述" class="headerlink" title="DNS概述"></a>DNS概述</h2><h3 id="域名系统：互联网上主机-路由器的识别问题："><a href="#域名系统：互联网上主机-路由器的识别问题：" class="headerlink" title="域名系统：互联网上主机/路由器的识别问题："></a>域名系统：互联网上主机/路由器的识别问题：</h3><ol>
+<li>IP地址</li>
+<li>域名： <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></li>
+<li>多层命名服务器构成的分布式数据库</li>
+</ol>
+<p><strong>DNS服务：</strong></p>
+<ol>
+<li>域名向IP地址的翻译</li>
+<li>主机别名</li>
+<li>邮件服务器别名</li>
+<li>负载均衡：Web服务器</li>
+</ol>
+<h3 id="DNS域名解析过程"><a href="#DNS域名解析过程" class="headerlink" title="DNS域名解析过程"></a>DNS域名解析过程</h3><p>当一个用户在浏览器中输入<a href="http://www.baidu.com时，DNS解析主要有以下几个步骤：" target="_blank" rel="noopener">www.baidu.com时，DNS解析主要有以下几个步骤：</a></p>
+<ol>
+<li><p>浏览器检查缓存中有没有这个域名对应的解析过的IP，如果缓存命中，解析结束；未命中，进入下个阶段。（浏览器的缓存大小和缓存时间都是有限制的）</p>
+</li>
+<li><p>查找操作系统缓存中是否有这个域名对应的DNS解析结果。缓存命中，解析结束。未命中，进入下个阶段（在Windows中可以通过<code>C:Windows\System32\drivers\etc\hosts</code>查看）;</p>
+</li>
+<li><p>如果本地缓存无法完成，那么就会把这个域名发送到LDNS（本地域名服务器），如果在学校接入互联网，那么LNDS就在学校；如果在小区接入互联网，那么这个LDNS就是接入互联网的应用提供商，即电信或联通。</p>
+<p>这个域名服务器的性能很好，缓存时间受域名的失效时间限制，不受缓存空间的限制。大约80%的域名解析都到这里就完成了。故LDNS承担了主要的域名解析工作;</p>
+</li>
+<li><p>如果LDNS仍然没有命中，就直接到Root Server域名服务器请求解析；</p>
+</li>
+<li><p>根域名服务器返回给本地域名服务器一个所查询的顶级域名服务器。顶级域名服务器包括<code>.com, .cn, .org</code>等。全球有十三台根域名服务器。</p>
+</li>
+<li><p>本地域名服务器再向上一步返回的顶级域名服务器发送请求；</p>
+</li>
+<li><p>接受请求的顶级域名服务器查找并返回此域名对应的权威域名服务器的地址。</p>
+</li>
+<li><p>权威域名服务服务器会查询存储的域名和IP的映射关系表，在正常情况下根据域名得到IP地址，连同一个TTL值返回给LDNS域名服务器。</p>
+</li>
+<li><p>LDNS缓存这个域名和IP，缓存的时间由TTL控制。</p>
+</li>
+<li><p>把解析的结果返回给用户，用户根据TTL值缓存在本地系统缓存中，域名解析结束。</p>
+</li>
+</ol>
+<h4 id="Note："><a href="#Note：" class="headerlink" title="Note："></a>Note：</h4><p>本地域名服务器也能够缓存顶级域名服务器的地址，因而允许本地DNS绕过查询链中的根域名服务器。</p>
+<p>主机向LDNS查询是递归查询，LDNS向根域名服务器查询是迭代查询。</p>
+<p><strong>互联网的域名结构：</strong></p>
+<p><img src="https://img.moilk.top/img/zhen/2019-09-12-134443.png" alt="image-20190912214442698"></p>
+<h3 id="DNS缓存："><a href="#DNS缓存：" class="headerlink" title="DNS缓存："></a>DNS缓存：</h3><p>只要域名解析服务器获得域名-IP映射，即缓存这一映射。一段时间过后，缓存条目失效。<strong>本地域名服务器一般会缓存顶级域名服务器的映射，因此根域名服务器不经常别访问</strong>。有效时间（两天）</p>
+<p>DNS可以使用UDP或者TCP进行传输，使用的<strong>端口号都为53</strong>.大多数情况下DNS使用UDP进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传从而保证可靠性。在两种情况下会使用TCP进行传输：</p>
+<ul>
+<li>返回的响应超过512字节（UDP）最大支持512字节；</li>
+<li>区域传送（主域名服务器向辅助域名服务器传送变化的那部分数据）</li>
+</ul>
+<h3 id="DNS记录和消息格式"><a href="#DNS记录和消息格式" class="headerlink" title="DNS记录和消息格式"></a>DNS记录和消息格式</h3><p>共同实现DNS分布式服务器的所有DNS服务器存储了资源记录，RR提供了主机名到IP地址的映射。</p>
+<p>资源记录（RR）包含了四个字段：<code>name，value，type，ttl</code></p>
+<p>TTL是该记录的生存时间，它决定了资源记录应当从缓存中删除的时间。Name和Value的值取决于Type：</p>
+<ul>
+<li>如果Type=A，则Name是主机名，Value是该主机名对应的IP地址。</li>
+<li>如果Type=NS，则Name是个域（如foo.com），而Value是该域权威域名解析服务器的主机域名。</li>
+<li>如果Type=CNAME，Name是某一真实域名的别名，Value是真实域名。</li>
+<li>如果Type=MX，Value是与name相对应的邮件服务器。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://izhen.tech/2019/09/02/进程通信的方式和细节/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -641,7 +886,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-31 16:49:33" itemprop="dateModified" datetime="2019-08-31T16:49:33+08:00">2019-08-31</time>
+                <time title="修改时间：2019-09-12 22:10:33" itemprop="dateModified" datetime="2019-09-12T22:10:33+08:00">2019-09-12</time>
               
             
           </span>
@@ -2232,207 +2477,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://izhen.tech/2019/03/01/24题一组数据交换相邻节点/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhen">
-      <meta itemprop="description" content="一个人只拥有此生此世是不够的，他还应该拥有诗意的世界。">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰棍工作室">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/01/24题一组数据交换相邻节点/" class="post-title-link" itemprop="url">24题一组数据交换相邻节点</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-01 16:49:57 / 修改时间：17:11:14" itemprop="dateCreated datePublished" datetime="2019-03-01T16:49:57+08:00">2019-03-01</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">772</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="交换相邻节点"><a href="#交换相邻节点" class="headerlink" title="交换相邻节点"></a>交换相邻节点</h2><blockquote>
-<p>难度：中等     思路：递归     </p>
-</blockquote>
-<h3 id="一、题目描述"><a href="#一、题目描述" class="headerlink" title="一、题目描述"></a>一、题目描述</h3><p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
-<p><strong>你不能只是单纯的改变节点内部的值</strong>，而是需要实际的进行节点交换。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/01/24题一组数据交换相邻节点/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2484,7 +2528,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2513,7 +2557,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2598,7 +2644,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2671,7 +2721,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">62k</span>
+    <span title="站点总字数">63k</span>
   
 
   
@@ -2680,7 +2730,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">56 分钟</span>
+    <span title="站点阅读时长">57 分钟</span>
   
 </div>
 
