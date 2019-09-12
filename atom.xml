@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://izhen.tech/"/>
-  <updated>2019-09-12T14:14:04.300Z</updated>
+  <updated>2019-09-12T14:15:00.610Z</updated>
   <id>http://izhen.tech/</id>
   
   <author>
@@ -21,16 +21,23 @@
     <link href="http://izhen.tech/2019/09/12/DNS%E6%9F%A5%E8%AF%A2/"/>
     <id>http://izhen.tech/2019/09/12/DNS查询/</id>
     <published>2019-09-12T01:52:31.000Z</published>
-    <updated>2019-09-12T14:14:04.300Z</updated>
+    <updated>2019-09-12T14:15:00.610Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="DNS概述"><a href="#DNS概述" class="headerlink" title="DNS概述"></a>DNS概述</h2><h3 id="域名系统：互联网上主机-路由器的识别问题："><a href="#域名系统：互联网上主机-路由器的识别问题：" class="headerlink" title="域名系统：互联网上主机/路由器的识别问题："></a>域名系统：互联网上主机/路由器的识别问题：</h3><ol><li>IP地址</li><li>域名： <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></li><li>多层命名服务器构成的分布式数据库</li></ol><p><strong>DNS服务：</strong></p><ol><li>域名向IP地址的翻译</li><li>主机别名</li><li>邮件服务器别名</li><li>负载均衡：Web服务器</li></ol><h3 id="DNS域名解析过程"><a href="#DNS域名解析过程" class="headerlink" title="DNS域名解析过程"></a>DNS域名解析过程</h3><p>当一个用户在浏览器中输入<code>www.baidu.com</code>时，DNS解析主要有以下几个步骤：</p><ol><li><p>浏览器检查缓存中有没有这个域名对应的解析过的IP，如果缓存命中，解析结束；未命中，进入下个阶段。（浏览器的缓存大小和缓存时间都是有限制的）</p></li><li><p>查找操作系统缓存中是否有这个域名对应的DNS解析结果。缓存命中，解析结束。未命中，进入下个阶段（在Windows中可以通过<code>C:Windows\System32\drivers\etc\hosts</code>查看）;</p></li><li><p>如果本地缓存无法完成，那么就会把这个域名发送到LDNS（本地域名服务器），如果在学校接入互联网，那么LNDS就在学校；如果在小区接入互联网，那么这个LDNS就是接入互联网的应用提供商，即电信或联通。</p><p>这个域名服务器的性能很好，缓存时间受域名的失效时间限制，不受缓存空间的限制。大约80%的域名解析都到这里就完成了。故LDNS承担了主要的域名解析工作;</p></li><li><p>如果LDNS仍然没有命中，就直接到Root Server域名服务器请求解析；</p></li><li><p>根域名服务器返回给本地域名服务器一个所查询的顶级域名服务器。顶级域名服务器包括<code>.com, .cn, .org</code>等。全球有十三台根域名服务器。</p></li><li><p>本地域名服务器再向上一步返回的顶级域名服务器发送请求；</p></li><li><p>接受请求的顶级域名服务器查找并返回此域名对应的权威域名服务器的地址。</p></li><li><p>权威域名服务服务器会查询存储的域名和IP的映射关系表，在正常情况下根据域名得到IP地址，连同一个TTL值返回给LDNS域名服务器。</p></li><li><p>LDNS缓存这个域名和IP，缓存的时间由TTL控制。</p></li><li><p>把解析的结果返回给用户，用户根据TTL值缓存在本地系统缓存中，域名解析结束。</p></li></ol><h4 id="Note："><a href="#Note：" class="headerlink" title="Note："></a>Note：</h4><p>本地域名服务器也能够缓存顶级域名服务器的地址，因而允许本地DNS绕过查询链中的根域名服务器。</p><p>主机向LDNS查询是递归查询，LDNS向根域名服务器查询是迭代查询。</p><p><strong>互联网的域名结构：</strong></p><p><img src="https://img.moilk.top/img/zhen/2019-09-12-134443.png" alt="image-20190912214442698"></p><h3 id="DNS缓存："><a href="#DNS缓存：" class="headerlink" title="DNS缓存："></a>DNS缓存：</h3><p>只要域名解析服务器获得域名-IP映射，即缓存这一映射。一段时间过后，缓存条目失效。<strong>本地域名服务器一般会缓存顶级域名服务器的映射，因此根域名服务器不经常别访问</strong>。有效时间（两天）</p><p>DNS可以使用UDP或者TCP进行传输，使用的<strong>端口号都为53</strong>.大多数情况下DNS使用UDP进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传从而保证可靠性。在两种情况下会使用TCP进行传输：</p><ul><li>返回的响应超过512字节（UDP）最大支持512字节；</li><li>区域传送（主域名服务器向辅助域名服务器传送变化的那部分数据）</li></ul><h3 id="DNS记录和消息格式"><a href="#DNS记录和消息格式" class="headerlink" title="DNS记录和消息格式"></a>DNS记录和消息格式</h3><p>共同实现DNS分布式服务器的所有DNS服务器存储了资源记录，RR提供了主机名到IP地址的映射。</p><p>资源记录（RR）包含了四个字段：<code>name，value，type，ttl</code></p><p>TTL是该记录的生存时间，它决定了资源记录应当从缓存中删除的时间。Name和Value的值取决于Type：</p><ul><li>如果Type=A，则Name是主机名，Value是该主机名对应的IP地址。</li><li>如果Type=NS，则Name是个域（如foo.com），而Value是该域权威域名解析服务器的主机域名。</li><li>如果Type=CNAME，Name是某一真实域名的别名，Value是真实域名。</li><li>如果Type=MX，Value是与name相对应的邮件服务器。</li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="DNS概述"><a href="#DNS概述" class="headerlink" title="DNS概述"></a>DNS概述</h2><h3 id="域名系统：互联网上主机-路由器的识别问题："><a href="#域名系统：互联网上主机-路由器的识别问题：" class="headerlink" title="域名系统：互联网上主机/路由器的识别问题："></a>域名系统：互联网上主机/路由器的识别问题：</h3><ol><li>IP地址</li><li>域名： <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></li><li>多层命名服务器构成的分布式数据库</li></ol><p><strong>DNS服务：</strong></p><ol><li>域名向IP地址的翻译</li><li>主机别名</li><li>邮件服务器别名</li><li>负载均衡：Web服务器<a id="more"></a><h3 id="DNS域名解析过程"><a href="#DNS域名解析过程" class="headerlink" title="DNS域名解析过程"></a>DNS域名解析过程</h3></li></ol><p>当一个用户在浏览器中输入<code>www.baidu.com</code>时，DNS解析主要有以下几个步骤：</p><ol><li><p>浏览器检查缓存中有没有这个域名对应的解析过的IP，如果缓存命中，解析结束；未命中，进入下个阶段。（浏览器的缓存大小和缓存时间都是有限制的）</p></li><li><p>查找操作系统缓存中是否有这个域名对应的DNS解析结果。缓存命中，解析结束。未命中，进入下个阶段（在Windows中可以通过<code>C:Windows\System32\drivers\etc\hosts</code>查看）;</p></li><li><p>如果本地缓存无法完成，那么就会把这个域名发送到LDNS（本地域名服务器），如果在学校接入互联网，那么LNDS就在学校；如果在小区接入互联网，那么这个LDNS就是接入互联网的应用提供商，即电信或联通。</p><p>这个域名服务器的性能很好，缓存时间受域名的失效时间限制，不受缓存空间的限制。大约80%的域名解析都到这里就完成了。故LDNS承担了主要的域名解析工作;</p></li><li><p>如果LDNS仍然没有命中，就直接到Root Server域名服务器请求解析；</p></li><li><p>根域名服务器返回给本地域名服务器一个所查询的顶级域名服务器。顶级域名服务器包括<code>.com, .cn, .org</code>等。全球有十三台根域名服务器。</p></li><li><p>本地域名服务器再向上一步返回的顶级域名服务器发送请求；</p></li><li><p>接受请求的顶级域名服务器查找并返回此域名对应的权威域名服务器的地址。</p></li><li><p>权威域名服务服务器会查询存储的域名和IP的映射关系表，在正常情况下根据域名得到IP地址，连同一个TTL值返回给LDNS域名服务器。</p></li><li><p>LDNS缓存这个域名和IP，缓存的时间由TTL控制。</p></li><li><p>把解析的结果返回给用户，用户根据TTL值缓存在本地系统缓存中，域名解析结束。</p></li></ol><h4 id="Note："><a href="#Note：" class="headerlink" title="Note："></a>Note：</h4><p>本地域名服务器也能够缓存顶级域名服务器的地址，因而允许本地DNS绕过查询链中的根域名服务器。</p><p>主机向LDNS查询是递归查询，LDNS向根域名服务器查询是迭代查询。</p><p><strong>互联网的域名结构：</strong></p><p><img src="https://img.moilk.top/img/zhen/2019-09-12-134443.png" alt="image-20190912214442698"></p><h3 id="DNS缓存："><a href="#DNS缓存：" class="headerlink" title="DNS缓存："></a>DNS缓存：</h3><p>只要域名解析服务器获得域名-IP映射，即缓存这一映射。一段时间过后，缓存条目失效。<strong>本地域名服务器一般会缓存顶级域名服务器的映射，因此根域名服务器不经常别访问</strong>。有效时间（两天）</p><p>DNS可以使用UDP或者TCP进行传输，使用的<strong>端口号都为53</strong>.大多数情况下DNS使用UDP进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传从而保证可靠性。在两种情况下会使用TCP进行传输：</p><ul><li>返回的响应超过512字节（UDP）最大支持512字节；</li><li>区域传送（主域名服务器向辅助域名服务器传送变化的那部分数据）</li></ul><h3 id="DNS记录和消息格式"><a href="#DNS记录和消息格式" class="headerlink" title="DNS记录和消息格式"></a>DNS记录和消息格式</h3><p>共同实现DNS分布式服务器的所有DNS服务器存储了资源记录，RR提供了主机名到IP地址的映射。</p><p>资源记录（RR）包含了四个字段：<code>name，value，type，ttl</code></p><p>TTL是该记录的生存时间，它决定了资源记录应当从缓存中删除的时间。Name和Value的值取决于Type：</p><ul><li>如果Type=A，则Name是主机名，Value是该主机名对应的IP地址。</li><li>如果Type=NS，则Name是个域（如foo.com），而Value是该域权威域名解析服务器的主机域名。</li><li>如果Type=CNAME，Name是某一真实域名的别名，Value是真实域名。</li><li>如果Type=MX，Value是与name相对应的邮件服务器。</li></ul>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h2 id=&quot;DNS概述&quot;&gt;&lt;a href=&quot;#DNS概述&quot; class=&quot;headerlink&quot; title=&quot;DNS概述&quot;&gt;&lt;/a&gt;DNS概述&lt;/h2&gt;&lt;h3 id=&quot;域名系统：互联网上主机-路由器的识别问题：&quot;&gt;&lt;a href=&quot;#域名系统：互联网上主机-路由器的识别问题
-      
+      &lt;h2 id=&quot;DNS概述&quot;&gt;&lt;a href=&quot;#DNS概述&quot; class=&quot;headerlink&quot; title=&quot;DNS概述&quot;&gt;&lt;/a&gt;DNS概述&lt;/h2&gt;&lt;h3 id=&quot;域名系统：互联网上主机-路由器的识别问题：&quot;&gt;&lt;a href=&quot;#域名系统：互联网上主机-路由器的识别问题：&quot; class=&quot;headerlink&quot; title=&quot;域名系统：互联网上主机/路由器的识别问题：&quot;&gt;&lt;/a&gt;域名系统：互联网上主机/路由器的识别问题：&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;IP地址&lt;/li&gt;
+&lt;li&gt;域名： &lt;a href=&quot;http://www.baidu.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;www.baidu.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;多层命名服务器构成的分布式数据库&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;DNS服务：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;域名向IP地址的翻译&lt;/li&gt;
+&lt;li&gt;主机别名&lt;/li&gt;
+&lt;li&gt;邮件服务器别名&lt;/li&gt;
+&lt;li&gt;负载均衡：Web服务器&lt;/li&gt;&lt;/ol&gt;
     
     </summary>
     
