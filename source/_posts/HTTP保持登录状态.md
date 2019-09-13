@@ -21,15 +21,15 @@ Cookies保存了登录的凭证，有了它，只需要在下次请求中携带C
 
 Session指有始有终的一系列动作/消息。比如，打电话时，从拿起电话拨号到挂断电话这一过程可以称为一个Session。
 
-而Web中，Session对象用来存储特定用户Session所需的属性和配置信息。这样，当用户在各个Web网页之间跳转是，存储在Session对象的变量不会丢失，而是在整个Session中一直存在下去。当用户请求来自应用程序的web网页时，如果该用户还没有Session，则web服务器会自动创建一个Session对象。而当Session过期或被放弃的时候，服务器就会终止该Session。
+而Web中，Session对象用来存储特定用户Session所需的属性和配置信息。这样，当用户在各个Web网页之间跳转时，存储在Session对象的变量不会丢失，而是在整个Session中一直存在下去。当用户请求来自应用程序的web网页时，如果该用户还没有Session，则web服务器会自动创建一个Session对象。而当Session过期或被放弃的时候，服务器就会终止该Session。
 
 #### Cookies
 
 Cookies指某些网站为了辨别用户身份，进行Session跟踪而存储在本地终端上的数据。
 
-当客户端第一次请求服务器是，服务器会返回一个请求头中带有Set-Cookie的字段相应给客户端，用来标记是哪个用户，客户端会把Cookies保存起来，Cookies携带了SessionID信息，服务器检查该Cookies即可查找到对应的Session是什么，然后再判断Session来一次辨别用户状态。
+当客户端第一次请求服务器时，服务器会返回一个请求头中带有Set-Cookie的字段相应给客户端，用来标记是哪个用户，客户端会把Cookies保存起来，Cookies携带了SessionID信息，服务器检查该Cookies即可查找到对应的Session是什么，然后再判断Session来以此辨别用户状态。
 
-成功登录某个网站时，服务器会告诉客户端设置哪些Cookies信息，在后序访问客户端会把Cookies发送给服务器，服务器再找到对应的Session加以判断。如果Session中某些设置登录状态是有效的，就证明用户处于登录状态，此次返回登录之后才可以查看网页内容，浏览器进行解析，用户就可以看到内容了。
+成功登录某个网站时，服务器会告诉客户端设置哪些Cookies信息，在后续访问客户端会把Cookies发送给服务器，服务器再找到对应的Session加以判断。如果Session中某些设置登录状态是有效的，就证明用户处于登录状态，此次返回登录之后才可以查看网页内容，浏览器进行解析，用户就可以看到内容了。
 
 ### 3. Cookies内容
 
@@ -40,7 +40,7 @@ Cookies指某些网站为了辨别用户身份，进行Session跟踪而存储在
 5. Path：该Cookie的使用路径。如果设置为/path/，则只有路径为/path/的页面可以访问该Cookie。如果设置为/，则本域名下所有页面都可以访问该Cookie。
 6. Size：该Cookie的大小。
 7. HTTP字段：Cookie的httponly属性。若此属性的值为true，则只用在HTTP头带有此Cookie信息，而不能通过document.cookie来访问此Cookie。
-8. Secure:该Cookie是否仅被使用安全协议传输。安全协议有HTTP和SSL等，在网络上传输数据前先将数据加密。默认为false。
+8. Secure:该Cookie是否仅被使用安全协议传输。安全协议有HTTPS和SSL等，在网络上传输数据前先将数据加密。默认为false。
 
 ### 4.常见误区
 
@@ -48,7 +48,7 @@ Cookies指某些网站为了辨别用户身份，进行Session跟踪而存储在
 
 传说中会话Cookie是把Cookie放在浏览器内存中，浏览器关闭后该Cookie失效，持久Cookie则会保持到客户端的硬盘中，下次还可以继续使用，长久保持用户登录状态。
 
-传说是假的，过期时间是由Cookie的Max Age或Expire决定的。持久化Cookie是把有效实际那设置的比较长，这样下次访问时仍然携带之前的cookie，就可以直接保持登录状态。
+传说是假的，过期时间是由Cookie的Max Age或Expire决定的。持久化Cookie是把有效时间设置的比较长，这样下次访问时仍然携带之前的cookie，就可以直接保持登录状态。
 
 #### Session误区
 
