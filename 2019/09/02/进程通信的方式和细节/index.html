@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img.moilk.top/img/zhen/2019-09-02-035443.png">
 <meta property="og:image" content="https://img.moilk.top/img/zhen/2019-09-02-035444.png">
-<meta property="og:updated_time" content="2019-09-02T04:04:00.600Z">
+<meta property="og:updated_time" content="2019-09-13T07:58:22.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程间通信的各种方式及比较">
 <meta name="twitter:description" content="进程间通信的各种方式进程间通信的方法包括管道(PIPE)、消息队列、信号、共享内存以及套接字(Socket)。 一、管道管道通常指无名管道，是UNIX系统IPC最古老的形式。 特点：  半双工（数据只能单向流动），具有固定的读端和写端 只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系 也可以看成是一种特殊的文件，对于它的读写也可以使用普通的read、write函数，但它不是普通的">
@@ -423,12 +423,24 @@
                 
               
 
-              <time title="创建时间：2019-09-02 11:54:07 / 修改时间：12:04:00" itemprop="dateCreated datePublished" datetime="2019-09-02T11:54:07+08:00">2019-09-02</time>
+              <time title="创建时间：2019-09-02 11:54:07" itemprop="dateCreated datePublished" datetime="2019-09-02T11:54:07+08:00">2019-09-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-13 15:58:22" itemprop="dateModified" datetime="2019-09-13T15:58:22+08:00">2019-09-13</time>
               
             
           </span>
@@ -525,7 +537,7 @@
 <h3 id="二、FIFO-命名管道"><a href="#二、FIFO-命名管道" class="headerlink" title="二、FIFO 命名管道"></a>二、FIFO 命名管道</h3><p>FIFO，也称为命名管道，是一种文件类型。</p>
 <p>特点：</p>
 <ol>
-<li>FIFO可以在无关的简称之间交换数据，与无名管道不同</li>
+<li>FIFO可以在无关的进程之间交换数据，与无名管道不同</li>
 <li>FIFO有路径名与之关联，以一种特殊设备文件形式存在于文件系统中。</li>
 </ol>
 <p>FIFO的通信方式类似于在进程中使用文件来传输数据，只不过FIFO类型文件同时具有管道的特性。在数据读出时，FIFO同时清除数据，并且“先进先出”。</p>
@@ -894,7 +906,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">57 分钟</span>
+    <span title="站点阅读时长">58 分钟</span>
   
 </div>
 

@@ -105,7 +105,7 @@
 <meta property="og:description" content="DNS概述域名系统：互联网上主机/路由器的识别问题： IP地址 域名： www.baidu.com 多层命名服务器构成的分布式数据库  DNS服务：  域名向IP地址的翻译 主机别名 邮件服务器别名 负载均衡：Web服务器">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img.moilk.top/img/zhen/2019-09-12-134443.png">
-<meta property="og:updated_time" content="2019-09-12T14:15:00.610Z">
+<meta property="og:updated_time" content="2019-09-13T02:20:19.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNS解析">
 <meta name="twitter:description" content="DNS概述域名系统：互联网上主机/路由器的识别问题： IP地址 域名： www.baidu.com 多层命名服务器构成的分布式数据库  DNS服务：  域名向IP地址的翻译 主机别名 邮件服务器别名 负载均衡：Web服务器">
@@ -422,12 +422,24 @@
                 
               
 
-              <time title="创建时间：2019-09-12 09:52:31 / 修改时间：22:15:00" itemprop="dateCreated datePublished" datetime="2019-09-12T09:52:31+08:00">2019-09-12</time>
+              <time title="创建时间：2019-09-12 09:52:31" itemprop="dateCreated datePublished" datetime="2019-09-12T09:52:31+08:00">2019-09-12</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-13 10:20:19" itemprop="dateModified" datetime="2019-09-13T10:20:19+08:00">2019-09-13</time>
               
             
           </span>
@@ -475,7 +487,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.5k</span>
+                <span title="本文字数">1.8k</span>
               
 
               
@@ -489,7 +501,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -556,15 +568,42 @@
 <li>返回的响应超过512字节（UDP）最大支持512字节；</li>
 <li>区域传送（主域名服务器向辅助域名服务器传送变化的那部分数据）</li>
 </ul>
-<h3 id="DNS记录和消息格式"><a href="#DNS记录和消息格式" class="headerlink" title="DNS记录和消息格式"></a>DNS记录和消息格式</h3><p>共同实现DNS分布式服务器的所有DNS服务器存储了资源记录，RR提供了主机名到IP地址的映射。</p>
+<h3 id="DNS记录和消息格式"><a href="#DNS记录和消息格式" class="headerlink" title="DNS记录和消息格式"></a>DNS记录和消息格式</h3><p>实现DNS分布式服务器的所有DNS服务器共同存储了资源记录，RR提供了主机名到IP地址的映射。</p>
 <p>资源记录（RR）包含了四个字段：<code>name，value，type，ttl</code></p>
 <p>TTL是该记录的生存时间，它决定了资源记录应当从缓存中删除的时间。Name和Value的值取决于Type：</p>
 <ul>
-<li>如果Type=A，则Name是主机名，Value是该主机名对应的IP地址。</li>
-<li>如果Type=NS，则Name是个域（如foo.com），而Value是该域权威域名解析服务器的主机域名。</li>
-<li>如果Type=CNAME，Name是某一真实域名的别名，Value是真实域名。</li>
-<li>如果Type=MX，Value是与name相对应的邮件服务器。</li>
+<li>如果Type=A，则Name是主机域名，Value是该主机域名对应的IP地址。例如(relay.bar.foo.com, 145.37.93.126, A)就是一条类型A的记录。</li>
+<li>如果Type=NS，则Name是个域（如foo.com），而Value是知道如何获得该域中主机地址的权威DNS服务器的主机域名。简单来说就是由哪个DNS服务器对该域名进行解析，如（foo.com, dns.foo.com, NS)是一条类型NS的记录。</li>
+<li>如果Type=CNAME，Name是某一真实域名的别名，Value是真实域名。简称别名解析，例如(foo.com, relay.bar.foo.com, CNAME)就是一条CNAME类型的记录。</li>
+<li>如果Type=MX，Value是与name相对应的邮件服务器的域名。（foo.com, mail.bar.foo.com, MX）就是一条MX记录。</li>
 </ul>
+<p>概要如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>将域名指向一个 IPv4 地址</td>
+</tr>
+<tr>
+<td>NS</td>
+<td>将子域名指向其它 DNS 服务器解析</td>
+</tr>
+<tr>
+<td>CNAME</td>
+<td>将域名指向另一个域名</td>
+</tr>
+<tr>
+<td>MX</td>
+<td>将域名指向邮件服务器地址</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -904,7 +943,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">57 分钟</span>
+    <span title="站点阅读时长">58 分钟</span>
   
 </div>
 
