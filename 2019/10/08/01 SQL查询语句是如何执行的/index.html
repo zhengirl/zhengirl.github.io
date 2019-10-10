@@ -96,17 +96,18 @@
 
 
 
-  <meta name="description" content="一个人只拥有此生此世是不够的，他还应该拥有诗意的世界。">
-<meta name="keywords" content="Learn">
-<meta property="og:type" content="website">
-<meta property="og:title" content="冰棍工作室">
-<meta property="og:url" content="http://izhen.tech/categories/MySQL/index.html">
+  <meta name="description" content="MySQL底层结构从MySQL的基础架构学起，比如，有一个非常简单的表T，表T只有一个ID字段，执行下面的查询语句： 1mysql&amp;gt; select * from T where ID=10; 这条查询语句在MySQL内部是如何执行的呢？">
+<meta name="keywords" content="MySQL,底层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL底层结构">
+<meta property="og:url" content="http://izhen.tech/2019/10/08/01 SQL查询语句是如何执行的/index.html">
 <meta property="og:site_name" content="冰棍工作室">
-<meta property="og:description" content="一个人只拥有此生此世是不够的，他还应该拥有诗意的世界。">
+<meta property="og:description" content="MySQL底层结构从MySQL的基础架构学起，比如，有一个非常简单的表T，表T只有一个ID字段，执行下面的查询语句： 1mysql&amp;gt; select * from T where ID=10; 这条查询语句在MySQL内部是如何执行的呢？">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-10T02:33:43.500Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="冰棍工作室">
-<meta name="twitter:description" content="一个人只拥有此生此世是不够的，他还应该拥有诗意的世界。">
+<meta name="twitter:title" content="MySQL底层结构">
+<meta name="twitter:description" content="MySQL底层结构从MySQL的基础架构学起，比如，有一个非常简单的表T，表T只有一个ID字段，执行下面的查询语句： 1mysql&amp;gt; select * from T where ID=10; 这条查询语句在MySQL内部是如何执行的呢？">
 
 
 
@@ -115,7 +116,7 @@
 
 
 
-  <link rel="canonical" href="http://izhen.tech/categories/MySQL/">
+  <link rel="canonical" href="http://izhen.tech/2019/10/08/01 SQL查询语句是如何执行的/">
 
 
 
@@ -125,7 +126,7 @@
   };
 </script>
 
-  <title>分类: MySQL | 冰棍工作室</title>
+  <title>MySQL底层结构 | 冰棍工作室</title>
   
 
 
@@ -173,7 +174,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -249,7 +250,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -313,28 +314,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -380,109 +359,273 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+    
+  
+  
+
+  
+
+  <article class="post post-type-normal true" itemscope="" itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block category">
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://izhen.tech/2019/10/08/01 SQL查询语句是如何执行的/">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>MySQL<small>分类</small>
-        </h1>
-      </div>
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhen">
+      <meta itemprop="description" content="一个人只拥有此生此世是不够的，他还应该拥有诗意的世界。">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="冰棍工作室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL底层结构
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-08 20:57:42" itemprop="dateCreated datePublished" datetime="2019-10-08T20:57:42+08:00">2019-10-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-10 10:33:43" itemprop="dateModified" datetime="2019-10-10T10:33:43+08:00">2019-10-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/08/01 SQL查询语句是如何执行的/" itemprop="url">
-            
-              <span itemprop="name">MySQL底层结构</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-08T20:57:42+08:00" content="2019-10-08">
-          10-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/19/事务隔离级别与锁的关系/" itemprop="url">
-            
-              <span itemprop="name">InnoDB中的事务隔离级别和锁的关系</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-19T20:50:39+08:00" content="2019-08-19">
-          08-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/11/数据库索引及其算法/" itemprop="url">
-            
-              <span itemprop="name">索引及其背后的数据结构支持</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-11T16:41:04+08:00" content="2019-08-11">
-          08-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h2 id="MySQL底层结构"><a href="#MySQL底层结构" class="headerlink" title="MySQL底层结构"></a>MySQL底层结构</h2><p>从MySQL的基础架构学起，比如，有一个非常简单的表T，表T只有一个ID字段，执行下面的查询语句：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from T where ID=10;</span><br></pre></td></tr></table></figure>
+<p>这条查询语句在MySQL内部是如何执行的呢？</p>
+<a id="more"></a>
+<p>大体来说，MySQL可以分为Server层和存储引擎层两部分。</p>
+<p>Server层包括连接器、查询缓存、分析器、优化器、执行器等，涵盖MySQL的大多数核心服务功能，所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器和视图等。</p>
+<p>而存储引擎层负责数据的存储和提取。其架构是插件式的，支持InnoDB，MyISAM，Memory等多个存储引擎。不同的存储引擎共用一个Server层，即从存储器到执行器的部分。</p>
+<h3 id="一、连接器"><a href="#一、连接器" class="headerlink" title="一、连接器"></a>一、连接器</h3><p>第一步，先连接到这个数据库，这时候站在第一位的是连接器。连接器负责跟客户端建立连接、获取权限、维持和管理连接。连接命令如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h$ip -P$port -u$user -p</span><br></pre></td></tr></table></figure>
+<p>输完命令之后，需要在交互对话里面输入密码。虽然密码也可以直接跟在-p后面写在命令行中，但这样可能会导致密码泄露。如果你连接的是生产服务器，强烈建议你不要这样做。</p>
+<p>连接命令中的mysql是客户端工具，用来跟服务器建立连接。在完成经典的TCP握手后，连接器就开始认证身份，这时候用的是输入的是用户名和密码。</p>
+<ul>
+<li>如果用户名或密码不对，就会收到一个“Access denied for user”的错误，然后客户端程序结束执行。</li>
+<li>如果用户名密码认证通过，连接器就会到权限表中查看拥有的权限。之后，这个连接里面的权限判断逻辑，都将依赖于此时读到的权限。</li>
+</ul>
+<p>这意味着，一个用户成功建立连接后，即使你用管理员账号对这个用户的权限做了修改，也不会影响到已经存在连接的权限。修改完成后，只有再新建的连接才会使用新的权限设置。</p>
+<p>连接完成后，如果你没有后续的动作，这个连接就处于空闲状态，你可以在<code>show processlist</code>命令中看到它。客户端如果太长时间没动静，连接器就会自动将它断开。这个时间默认是wait_timeout控制的，默认值是8小时。如果在连接被断开后，客户端再次发送请求的话，就会收到一个错误提醒：Lost connection to MySQL server during query。这时候如果你要继续，就需要重连，然后再执行请求了。</p>
+<p>数据库里面，长连接是指连接成功后，如果客户端持续有请求，则一直使用同一个连接。短连接则是指每次执行完很少的几次查询就断开连接，下次查询再重新建立一个。建立的连接的过程通常是比较复杂的，因此建议在使用中尽量减少建立连接的动作，即尽量使用长连接。</p>
+<p>但是全部使用长连接后，可能会出现MySQL占用内存涨的特别快的情况，这是因为MySQL在执行过程中临时使用的内存是管理在连接对象里面的。这些资源会在连接断开的时候才释放，所以如果长连接累计下来，可能导致内存占用太大，被系统强行杀掉(OOM)，从现象上看就是MySQL异常重启了。</p>
+<p>怎么解决这个问题呢？有两种解决方案：</p>
+<ol>
+<li>定期断开长连接。使用一段时间，或者程序里面判断执行过一个占用内存的大查询后，断开连接，之后要查询再重连。</li>
+<li>如果你用的是MySQL 5.7或更新版本，可以在每次执行一个比较大的操作后，通过执行mysql_reset_connect来重新初始化连接资源。这个过程不需要重连和重新做权限验证，但是会将连接恢复到刚刚创建完时的状态。</li>
+</ol>
+<h3 id="二、查询缓存"><a href="#二、查询缓存" class="headerlink" title="二、查询缓存"></a>二、查询缓存</h3><p>连接建立完成后，就可以执行select语句了。执行逻辑就会来到第二步：查询缓存。</p>
+<p>MySQL拿到一个查询请求后，会先到查询缓存看看，之前是不是执行过这条语句。之前执行过的语句则其结果可能会以key-value对的形式，被直接缓存在内存中。key是查询的语句，value是查询的结果。如果你的查询能够直接在这个缓存中找到key，那么这个value就会直接返回给客户端。</p>
+<p>如果语句不在查询缓存中，就会继续后面的执行阶段。执行完成后，执行结果会被存入查询缓存中。你可以看到，如果查询命中缓存，MySQL不需要执行后面的复杂操作，就可以直接返回结果，这个效率会很高。</p>
+<p>但是大多数情况下建议不要使用查询缓存？因为查询缓存往往弊大于利。</p>
+<p>查询缓存的失效非常频繁，只要有对一个表的更新，这个表上所有的查询缓存都会被清空。</p>
+<p>同时，MySQL 8.0版本将查询缓存整块删掉了，即8.0后彻底没有这个功能了。</p>
+<h3 id="三、分析器"><a href="#三、分析器" class="headerlink" title="三、分析器"></a>三、分析器</h3><p>如果没有命中查询缓存，就要开始真正执行语句了。首先，MySQL需要知道你要做什么，因此需要对SQL语句做解析。分析器先做“词法分析”，识别字符串是什么，代表什么；然后做“语法分析”，语法分析器根据语法规则，判断SQL语句是否满足MySQL语法。</p>
+<p>一般语法错误会提示第一个出现错误的位置，因此要关注的是后面的内容。</p>
+<h3 id="四、优化器"><a href="#四、优化器" class="headerlink" title="四、优化器"></a>四、优化器</h3><p>经过了分析器，MySQL就知道你要做什么了。在开始执行之前，还要先经过优化器的处理。优化器是在表里面有多个索引的时候，决定使用哪个索引；或者在一个语句有多表关联(join)的时候，决定各个表的连接顺序。</p>
+<h3 id="五、执行器"><a href="#五、执行器" class="headerlink" title="五、执行器"></a>五、执行器</h3><p>MySQL通过分析器知道了你要做什么，通过优化器知道了该怎么做，然后进入执行器阶段，开始执行语句。开始执行的时候，要先判断一下你对表T有没有执行查询的权限，如果没有，就会返回没有权限的错误。如果有权限，就打开表继续执行。打开表的时候，执行器就会根据表的引擎定义，去使用这个引擎提供的接口。</p>
+<p>在数据库的慢查询日志中看到一个<code>rows_examined</code>的字段，表示这个语句执行过程中扫描了多少行。这个值就是在执行器每次调用引擎获取数据行的时候累加的。</p>
+<p>在有些场景下，执行器调用一次，在引擎内部扫描了多行，因此<strong>引擎扫描行数跟rows_examined并不是完全相同的。</strong></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+          
+            <a href="/tags/底层/" rel="tag"><i class="fa fa-tag"></i> 底层</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/12/DNS查询/" rel="next" title="DNS解析">
+                <i class="fa fa-chevron-left"></i> DNS解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -505,8 +648,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -695,6 +847,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL底层结构"><span class="nav-text">MySQL底层结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、连接器"><span class="nav-text">一、连接器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、查询缓存"><span class="nav-text">二、查询缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、分析器"><span class="nav-text">三、分析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、优化器"><span class="nav-text">四、优化器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、执行器"><span class="nav-text">五、执行器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -831,6 +1000,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
@@ -841,6 +1014,8 @@
 
   
 
+
+  
 
 
   

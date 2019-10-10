@@ -111,7 +111,7 @@
 <meta property="og:image" content="https://img.moilk.top/img/zhen/2019-08-12-114032.png">
 <meta property="og:image" content="https://img.moilk.top/img/zhen/2019-08-12-115607.png">
 <meta property="og:image" content="https://img.moilk.top/img/zhen/2019-08-12-120152.png">
-<meta property="og:updated_time" content="2019-08-12T13:40:17.360Z">
+<meta property="og:updated_time" content="2019-09-13T09:35:46.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="索引及其背后的数据结构支持">
 <meta name="twitter:description" content="索引及其背后的数据结构支持索引索引是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时。 数据库查询是数据库最主要的功能之一. 如果想要理解MySQL中索引是如何工作的，最简单的方法就是去看看一本书的“目录”部分：如果想在一本书中找到某个索引，一般会先看书的“目录”，找到对应的页码。">
@@ -445,7 +445,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-12 21:40:17" itemprop="dateModified" datetime="2019-08-12T21:40:17+08:00">2019-08-12</time>
+                <time title="修改时间：2019-09-13 17:35:46" itemprop="dateModified" datetime="2019-09-13T17:35:46+08:00">2019-09-13</time>
               
             
           </span>
@@ -599,7 +599,7 @@
 <p>了解不同存储引擎的索引实现对于正确使用和优化索引都非常有帮助，例如知道了InnoDB的索引实现后，就很容易明白为什么不建议使用过长的字段作为主键，因为所有辅助索引都引用主索引，过长的主索引会令辅助索引变得过大。再例如，用非单调的字段作为主键在InnoDB中不是一个好主意，因为InnoDB数据本间本身是一颗B+Tree，非单调的主键会造成在插入新记录时数据文件为了维持B+Tree的特性而频繁的分裂调整，十分低效，而使用自增字段作为主键则是一个很好的选择。</p>
 <h2 id="索引使用策略及优化"><a href="#索引使用策略及优化" class="headerlink" title="索引使用策略及优化"></a>索引使用策略及优化</h2><p>MySQL的优化主要分为结构优化和查询优化。本章讨论的高性能索引策略主要属于结构化优化范围。</p>
 <h3 id="最长前缀原理与相关优化"><a href="#最长前缀原理与相关优化" class="headerlink" title="最长前缀原理与相关优化"></a>最长前缀原理与相关优化</h3><p>高效使用索引的首要条件是知道什么样的查询会使用到索引，这个问题和B+Tree中的“最左前缀原理”有关。主键有三个<code>emp_no, title, from_date</code>.</p>
-<h4 id="情况一：全列匹配"><a href="#情况一：全列匹配" class="headerlink" title="情况一：全列匹配"></a>情况一：全列匹配</h4><p>很明显，当按照索引中的所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。理论上索引对顺序使敏感的，但是由于MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。 </p>
+<h4 id="情况一：全列匹配"><a href="#情况一：全列匹配" class="headerlink" title="情况一：全列匹配"></a>情况一：全列匹配</h4><p>很明显，当按照索引中的所有列进行精确匹配（这里精确匹配指“=”或“IN”匹配）时，索引可以被用到。理论上索引对顺序是敏感的，但是由于MySQL的查询优化器会自动调整where子句的条件顺序以使用适合的索引。 </p>
 <h4 id="情况二：最左前缀匹配"><a href="#情况二：最左前缀匹配" class="headerlink" title="情况二：最左前缀匹配"></a>情况二：最左前缀匹配</h4><p>当查询条件精确匹配索引的左边连续一个或几个列时，索引可以被用到，但是只用到一部分，即条件所组成的最左前缀。</p>
 <h4 id="情况三：查询条件用到了索引中列的精确匹配，但是中间某个条件未提供。"><a href="#情况三：查询条件用到了索引中列的精确匹配，但是中间某个条件未提供。" class="headerlink" title="情况三：查询条件用到了索引中列的精确匹配，但是中间某个条件未提供。"></a>情况三：查询条件用到了索引中列的精确匹配，但是中间某个条件未提供。</h4><p>此时索引使用情况和情况二相同，因为title未提供，所以<strong>查询只用到了索引的第一列</strong>，而后面的from_date虽然也在索引中，但是由于title不存在而无法和左前缀连接，因此需要<strong>对结果进行扫描过滤</strong>from_date（这里由于emp_no唯一，所以不存在扫描）。如果想让from_date也使用索引而不是where过滤，可以增加一个辅助索引&lt;emp_no, from_date&gt;，此时上面的查询会使用这个索引。除此之外，还可以使用一种称之为“隔离列”的优化方法，将emp_no与from_date之间的“坑”填上。</p>
 <p>“填坑”后性能提升了一点。如果经过emp_no筛选后余下很多数据，则后者性能优势会更加明显。当然，如果title的值很多，用填坑就不合适了，必须建立辅助索引。</p>
@@ -745,7 +745,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -865,7 +865,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">37</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -955,7 +959,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">63k</span>
+    <span title="站点总字数">66k</span>
   
 
   
@@ -964,7 +968,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">58 分钟</span>
+    <span title="站点阅读时长">1:01</span>
   
 </div>
 
