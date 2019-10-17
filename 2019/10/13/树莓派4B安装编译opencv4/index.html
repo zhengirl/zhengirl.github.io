@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="冰棍工作室">
 <meta property="og:description" content="树莓派4B编译安装OpenCV4一、找到官方的安装教程​    这个教程是谷歌出来的，树莓派4B是官方推出的最新版，在树莓派3B上面的安装成功的教程不适用于树莓派4B，会遇到各种难以解决的报错问题，所以找一个好教程非常重要。教程地址：https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html。不科学上网也是可以打开的，这里我就">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-17T02:11:09.760Z">
+<meta property="og:updated_time" content="2019-10-17T02:23:43.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树莓派4B编译安装OpenCV4">
 <meta name="twitter:description" content="树莓派4B编译安装OpenCV4一、找到官方的安装教程​    这个教程是谷歌出来的，树莓派4B是官方推出的最新版，在树莓派3B上面的安装成功的教程不适用于树莓派4B，会遇到各种难以解决的报错问题，所以找一个好教程非常重要。教程地址：https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html。不科学上网也是可以打开的，这里我就">
@@ -437,7 +437,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-17 10:11:09" itemprop="dateModified" datetime="2019-10-17T10:11:09+08:00">2019-10-17</time>
+                <time title="修改时间：2019-10-17 10:23:43" itemprop="dateModified" datetime="2019-10-17T10:23:43+08:00">2019-10-17</time>
               
             
           </span>
@@ -519,7 +519,7 @@
       
 
       
-        <h2 id="树莓派4B编译安装OpenCV4"><a href="#树莓派4B编译安装OpenCV4" class="headerlink" title="树莓派4B编译安装OpenCV4"></a>树莓派4B编译安装OpenCV4</h2><h3 id="一、找到官方的安装教程"><a href="#一、找到官方的安装教程" class="headerlink" title="一、找到官方的安装教程"></a>一、找到官方的安装教程</h3><p>​    这个教程是谷歌出来的，树莓派4B是官方推出的最新版，在树莓派3B上面的安装成功的教程不适用于树莓派4B，会遇到各种难以解决的报错问题，所以找一个好教程非常重要。教程地址：<a href="https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html。不科学上网也是可以打开的，这里我就不翻译了。推荐把SD卡的内存升级一下，16G的内存卡就会很勉强，需要删除一些不经常使用的软件，为了避免因内存不足出现的错误，建议直接将内存卡升级到32G或64G。" target="_blank" rel="noopener">https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html。不科学上网也是可以打开的，这里我就不翻译了。推荐把SD卡的内存升级一下，16G的内存卡就会很勉强，需要删除一些不经常使用的软件，为了避免因内存不足出现的错误，建议直接将内存卡升级到32G或64G。</a></p>
+        <h2 id="树莓派4B编译安装OpenCV4"><a href="#树莓派4B编译安装OpenCV4" class="headerlink" title="树莓派4B编译安装OpenCV4"></a>树莓派4B编译安装OpenCV4</h2><h3 id="一、找到官方的安装教程"><a href="#一、找到官方的安装教程" class="headerlink" title="一、找到官方的安装教程"></a>一、找到官方的安装教程</h3><p>​    这个教程是谷歌出来的，树莓派4B是官方推出的最新版，在树莓派3B上面的安装成功的教程不适用于树莓派4B，会遇到各种难以解决的报错问题，所以找一个好教程非常重要。教程地址：<code>https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html</code>。不科学上网也是可以打开的，这里我就不翻译了。推荐把SD卡的内存升级一下，16G的内存卡就会很勉强，需要删除一些不经常使用的软件，为了避免因内存不足出现的错误，建议直接将内存卡升级到32G或64G。</p>
 <a id="more"></a>
 <p>​    在安装OpenCV的依赖过程中，我有两个依赖安装失败了，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libgtk2.0-dev libcanberra-gtk*</span><br><span class="line">sudo apt-get install gcc-arm*</span><br></pre></td></tr></table></figure>
@@ -537,7 +537,7 @@
 <h3 id="四、读取摄像头数据并显示"><a href="#四、读取摄像头数据并显示" class="headerlink" title="四、读取摄像头数据并显示"></a>四、读取摄像头数据并显示</h3><p>打开摄像头并显示成功。同样是采用cmake的方式编译，套路和上面一样。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//读取视频或摄像头</span></span><br><span class="line">	<span class="function">VideoCapture <span class="title">capture</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		Mat frame;</span><br><span class="line">		capture &gt;&gt; frame;</span><br><span class="line">		imshow(<span class="string">"读取视频"</span>, frame);</span><br><span class="line">		waitKey(<span class="number">30</span>);	<span class="comment">//延时30</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><ol>
-<li>找个靠谱的安装opencv的教程比什么都重要，这里再次点赞这个博客。教程地址<a href="https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html，但是里面有两个依赖安装失败，尾部含有`*`号，`libcanberra-gtk*`和`gcc-arm*`，但是似乎不影响后面的编译运行。" target="_blank" rel="noopener">https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html，但是里面有两个依赖安装失败，尾部含有`*`号，`libcanberra-gtk*`和`gcc-arm*`，但是似乎不影响后面的编译运行。</a></li>
+<li>找个靠谱的安装opencv的教程比什么都重要，这里再次点赞这个博客。教程地址<code>https://qengineering.eu/install-opencv-4.1-on-raspberry-pi-4.html</code>，但是里面有两个依赖安装失败，尾部含有<code>*</code>号，<code>libcanberra-gtk*</code>和<code>gcc-arm*</code>，但是似乎不影响后面的编译运行。</li>
 <li>经过了一夜的编译，第二天上午一看，编译成功了。</li>
 <li>前一天在树莓派3B上成功运行了opencv3的程序，采用g++ 方式编译运行，在树莓派4B上希望用同样的代码跑通，但是各种报错。主要原因有两个：opencv最好用cmake的方式编译，用g++本来就是很不稳妥的；其次，opencv3和opencv4的版本兼容问题。知乎上一篇文章，<a href="https://zhuanlan.zhihu.com/p/54845295" target="_blank" rel="noopener">opencv4从入门到放弃</a>，本来被opencv2的库找不到苦恼了一上午，以为是救星，这篇文章说先试着运行samples里面的例子，但是我cmake编译时报错，现在想想可能是OpenCV4的安装路径没有匹配。首先是cpp代码中OpenCV4的版本问题，其次<code>CMakeLists</code>中第一行的代码出错；于是我就开始谷歌找错的过程，希望能够解决。均无果。愈加烦躁。各种努力，仍旧报错。</li>
 <li>于是只好放弃官方示例中的程序，自己去找了一篇通过opencv显示图片的代码，自己修改CMakeLists的内容，于是竟然跑通了。注意：ssh中执行这个代码是无法成功的，可以编译通过，但是必须最终用树莓派自身执行。</li>
@@ -895,7 +895,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:03</span>
+    <span title="站点阅读时长">1:02</span>
   
 </div>
 
